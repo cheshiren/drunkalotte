@@ -1,0 +1,480 @@
+!%
+
+!=============================================================================
+Include "CyrDef";
+Constant Story "Наливайя";
+Constant Headline
+	"^Автор: Вячеслав Добранов^";
+     
+!Constant MAX_CARRIED 1;
+!Constant NO_SCORE;
+Constant time_type 24;k
+Replace DrawStatusLine;
+
+Attribute full;
+Attribute lefted;
+Attribute righted;
+Attribute salted;
+Attribute wet;
+
+Include "Parser";
+
+Object LibraryMessages ! must be defined between Parser and VerbLib
+	with before [;
+		Inv: switch (lm_n) {
+				2: print "У тебя есть"; rtrue;
+			};
+		Miscellany: switch (lm_n) {
+				19: "Ты выглядишь как обычно. Вроде бы.";
+			};
+		PutOn: switch (lm_n) {
+				8: if (noun == glass || noun == salter) {"Ты ставишь ", (cAcc) noun, " на ", (cAcc) second, ".";}
+			};
+		Look: switch (lm_n) {
+				4: if (children(counter) > 1) {print "^На барной стойке перед тобой стоят ";}
+					else {print "^На барной стойке перед тобой стоит ";}
+					WriteListFrom(child(counter), FULLINV_BIT + ENGLISH_BIT + RECURSE_BIT); ".";
+			};
+	];
+Include "VerbLib";
+
+Global whathand;
+Global shots;
+Global drunk;
+Global hours;
+Global minutes;
+
+!============================================================================
+! Всякая неведомая фигня
+
+[ Pause k;
+        print "^^[пробел]";
+	@read_char 1 -> k;
+        rtrue;
+];
+ 
+[ Clear k;
+        @erase_window 0;
+	if (k==1) rtrue;
+	<Look>;
+];
+
+[ DrawStatusLine width posa posb posc;
+	@split_window 1; @set_window 1; @set_cursor 1 1; style reverse;
+	width = 0->33; posa = width-43; posb = width-25; posc = width-6; 
+	spaces (width);
+	@set_cursor 1 2; PrintShortName(location);
+	if (width > 100) {
+		@set_cursor 1 posa; print "количество рюмок:", shots, " | степень опьянения:", drunk, "%";
+	}
+	if (width > 50 && width <= 100) {
+		@set_cursor 1 posb; print "рюмки:", shots, " | опьянение:", drunk, "%";
+	}
+	if (width > 30 && width <= 50) {
+		@set_cursor 1 posc; print shots, "|", drunk, "%";
+	}
+	@set_cursor 1 1; style roman; @set_window 0;
+];
+
+!============================================================================
+! Классы
+
+Class Room
+	with before [;
+			
+		],
+	has light;
+	
+!Class NPC
+!	with life [;
+	!	Answer,Ask,Order,Tell:
+	!		"[Используйте команду @<<говорить с ", (cIns) noun, "@>>].";
+!	],
+!	has animate;
+	
+Class Prop
+	with  before [;
+		Examine:
+			return false;
+		Salting, SaltingT:
+			<<Salting salter>>;
+		default:
+			print_ret "Лучше не отвлекаться от главного.";
+		],
+		found_in [; return true; ],
+	has scenery;
+	
+Class Hand
+	with name "рук" "ладон",
+		before [;
+			Take: "Ты надолго задумываешься.";
+			Drop: "После недолгих колебаний ты решаешь, что рука тебе ещё пригодится.";
+			PutOn: "Твои руки уже лежат на барной стойке.";
+			Salting, SaltingT: if (salter in self) "Ты пытаешься посыпать солью ту же руку, в которой держишь солонку, но, естественно, ничего не выходит.";
+						if (salter in right) {
+							whathand = 1;
+							give left salted;
+							"Ты насыпаешь немного соли на тыльную сторону левой руки.";
+						}
+						if (salter in left) {
+							whathand = 2;
+							give right salted;
+							"Ты насыпаешь немного соли на тыльную сторону правой руки.";
+						}
+		],
+	has container open female;
+	
+Class Possession
+	with before [;
+			Take: if (parent (self) ofclass Hand) "Ты уже держишь ", (cAcc) noun, " в ", (cDat) parent (noun), ".";
+				if (children (right) == 0) {
+					move self to right; 
+					whathand = 1;
+					"Ты берёшь ", (cAcc) noun, " в правую руку.";
+				} 
+				else if (children (left) == 0) {
+					move self to left;
+					whathand = 2;
+					"Ты берёшь ", (cAcc) noun, " в левую руку.";
+				}
+				else  "Ты не уверен, но, кажется, обе твои руки заняты.";
+			Drop: if (self == lime) <<PutOn self plate>>;
+				<<PutOn self counter>>;
+			PutOn: if (parent (self) ofclass Hand) {
+					if (self in right) whathand = 1; else whathand = 2;
+					move self to player;
+					<<PutOn self second>>;
+				}
+		];
+
+	
+
+!============================================================================
+! Entry point routines
+
+[ Initialise ;
+	location = place;
+	move left to player; 
+	move right to player;
+	shots = 0;
+	drunk = 50;
+	hours = 23;
+	minutes = 36;
+	box "Пусть утром солнце накажет меня,"
+	"Пусть дома скажет моя семья,"
+	"Что я свинья, но это не я,"
+	"Нет, это не я,"
+	"Во всем виновата текила."
+	""
+	"                   Tequilajazzz @<<Наливайя@>>";
+	pause();
+	clear(1);
+	print "^Часы над головой бармена показывают, что прошло уже три часа с тех пор, как ты зашёл в этот бар. Конечно, изначально ты планировал лишь спокойно выпить чашечку кофе после тяжёлого трудового дня, может быть, выкурить пару сигарет, а потом вернуться домой к ужину. Однако, как это часто бывает в этих делах, все планы были разрушены встречей со старым приятелем. В результате, после шести кружек пива, двух гневных звонков из дома и трёх походов в туалет, кто-то из вас высказал предложение выпить текилы.^^";
+];
+
+!============================================================================
+! Описание игровых объектов
+
+!-------------------------------------------------------------------------------------------
+
+Room place "У барной стойки"
+	with description [; print "Это твой любимый бар, это твоё любимое место у стойки и это твой любимый сорт пива, три литра которого ты только что допил. Пока всё шло привычно, но, похоже, наступило время экспериментов.^";
+				if (self hasnt visited) {"^@<<Вот, смотри, как это делается, — говорит твой товарищ, затем облизывает край своей рюмки, аккуратно посыпает его солью, выпивает и закусывает кусочком лайма. — Уф, хорошо. Ну так вот. На чем я там остановился?@>> И он продолжает свой рассказ.";}
+				rtrue;
+		],
+		initial [;
+			StartDaemon(salt_daemon);
+		],
+		before [;
+			Smell: "Запах сигаретного дыма и кисловатый запах пива.";
+			Listen: "Из колонок доносится ненавязчивый блюз, не мешающий вечному гулу разговоров. Твой приятель рассказывает очередную свою историю.";
+			VagueGo, Go: "Домой тебе пока не хочется, а в туалете ты был всего полчаса назад.";
+			Salting, SaltingT:  if (parent(salter) ~= left && parent(salter) ~= right) "Для начала нужно взять солонку.";
+			Lick: if (noun has salted) {<<Lick salter noun>>;}
+			Taste: switch (random(4)) {
+						1: print "Привычный ";
+						2: print "Ничем не примечательный ";
+						3: print "Как и ожидалось - ";
+						4: print "Ничего не обычного, просто ";
+					}
+				print "вкус ", (cGen) noun, ".^";
+				rtrue;
+		!	Insert: move noun to player; rfalse;
+		],
+		after [;
+		!	Insert: if (noun in player) {if (noun has lefted) {move noun to left;} else {move noun to right;};} else {give noun ~righted; give noun ~lefted;}
+		];
+
+Object -> counter "барн/ая стойк/а"
+	with name "барн" "стойк",
+		description [;
+				print "Лакированная деревянная поверхность, покрытая патиной от многолетних прикосновений, ударов, разлитий";
+				if (self has salted) {print ". С рассыпанной повсюду солью";}
+				".";
+		],
+		before [;
+			Salting, SaltingT: give self salted; "Ты рассыпаешь соль по всей поверхности стойки, до которой можешь дотянуться.";
+		],
+	has female supporter scenery;
+		
+Object -> -> plate "тарелк/а"
+	with name "тарелк",
+		description [;
+				print "Неглубокая белая тарелка, мокрая от сока лайма";
+				if (self has salted) {print ", в котором растворяются кристаллики соли";}
+				".";
+		],
+		invent [; if (lime in self) {print "тарелка с одним кусочком лайма";} else {print "пустая тарелка";}; rtrue;],
+		before [;
+			Take: "Сама тарелка тебе совсем ни к чему. Важно её содержимое.";
+			Empty, EmptyT: <<Take lime>>;
+			Salting, SaltingT: give self salted; if (lime in self) {give lime salted; "Ты, прищурившись, рассыпаешь соль по всей тарелке и по лежащему на ней лайму.";} else {"Ты, прищурившись, рассыпаешь соль по всей тарелке.";}
+			Receive: if (lime in self) {"На тарелке уже лежит лайм.";}
+				if (noun ~= lime) {"Но если на тарелке будет ", (cNom) noun, ", то не останется места для лайма.";}
+		],
+	has female supporter static;
+	
+Possession -> -> -> lime "лайм/"
+	with name "лайм" "дольк" "кусочек" "ломтик" "четвертинк",
+		short_name "лайм",
+		description [;
+				print "Долька лайма. Его зелёная кожура поблёскивает в свете ламп";
+				if (self has salted) {print ". Зачем-то посолен";}
+				".";
+		],
+		invent [;
+				if (self has salted) {self.short_name = "лайм (с солью)";} else {self.short_name = "лайм";}
+			],
+		before [;
+			Salting, SaltingT: give self salted; "Ты аккуратно сыпешь несколько крупинок соли на лайм.";
+			Eat:  if (self in left) {whathand = 2;}
+				if (self in right) {whathand = 1;}
+				if (self in left || self in right) {give parent (self) ~full; give noun ~righted; give noun ~lefted; give self absent; MoveFloatingObjects(); "Ты отправляешь лайм в рот и, жмурясь, пережёвываешь его.";} else {"Наклонившись над тарелкой, ты пытаешься зацепить дольку лайма одними губами и языком. Не выходит.";}
+		],
+	has male edible;
+
+Possession -> -> salter "солонк/а"
+	with name "сол" "солонк" "соль" "солью" "название", 
+		description "Белая керамическая солонка со множеством дырочек наверху и названием бара сбоку: @<<GIN & JAZZ@>>.",
+		before [;
+			Empty, EmptyT: <<Salting self second>>;
+			Salting, SaltingT: if (second == nothing) {"Ты посыпаешь вокруг себя солью.";} else {if (second == self) {"Ты крепко задумываешься на несколько секунд.";} else {<<Salting second>>;};}
+			Read: <<Examine self>>;
+			Lick: if (second ~= nothing) {
+					if (second has salted) {
+						give second ~salted;
+						switch (second) {
+							left: "Ты одним движением слизываешь соль со своей левой руки.";
+							right: "Ты одним движением слизываешь соль со своей правой руки.";
+							glass: "Ты наклоняешься над рюмкой и круговым движением языка слизываешь с неё соль.";
+							lime: "Ты облизываешь лайм, чувствуя одновременно солёность и кислоту.";
+							plate: "Ты нависаешь над тарелкой и вылизываешь с неё всю соль.";
+							counter: "Тебе приходится немало потрудиться, но ты все-таки вылизываешь всю соль с барной стойки.";
+							tequila: "Ты наклоняешься и болтаешь языком в рюмке с текилой.";
+							default: "Солёно.";
+						}
+					} else {
+						"Тут соли нет.";
+					}
+				} else {
+					if (glass in left || glass in right) "Ты сыпешь немного соли себе на язык. Ну слава богу. Не йодированная.";
+					if (self in left || self in right) "Ты касаешься языком дырочек на верху солонки. Точно. Соль.";
+					else "Ты наклоняешься над стоящей на стойке солонкой и касаешься её языком. Точно. Соль.";
+				}
+			Remove: if (self == second) {"Солонка плотно закрыта.";} <<Lick self second>>;
+		],
+	has female;
+
+Possession -> -> glass "рюмк/а"
+	with name "рюмк" "цилиндр" "рюмочк" "край" "краешек",
+		short_name,
+		description [;
+				if (self has full) {print "Стеклянный полый цилиндр с толстым дном, наполненный коричневатой текилой";} else {print "Стеклянный полый цилиндр с толстым дном. В данный момент пустой";}
+				if (self has salted) {print ". По его краю насыпана дорожка соли";}
+				if (self has full && tequila has salted) {print ". На дне видны несколько медленно растворяющихся кристалликов";}
+				".";
+		],
+		invent [; if (self in counter) {if (tequila in self) {print "рюмка текилы";} else {print "пустая рюмка";} rtrue;}
+				if (self has salted) {self.short_name = "рюмка (с солью)";} else {self.short_name = "рюмка";};],
+		before [;
+			Salting, SaltingT: if (self has wet) {give self salted; "Ты, взяв щепотку соли, аккуратно сыпешь её на мокрый край рюмки.";} else {"Ты, взяв щепотку соли, аккуратно сыпешь её на край рюмки, но она тут же с него ссыпается.";}
+			Drink: <<Drink tequila>>;
+			Lick: give self wet; "Ты аккуратно облизываешь краешек рюмки.";
+			Receive: if (noun == lime) {give lime ~salted; "Ты макаешь лайм в текилу и облизываешь.";}
+				"Коктейль @<<текила + ", (cNom) noun, "@>>? Может быть, но не сегодня.";
+		],
+	has female container open full;
+	
+Object -> -> -> tequila "текил/а"
+	with name "текил" "жидкост" "янтарн" "темн",
+		short_name,
+		description "Маслянистая жидкость цвета тёмного янтаря.",
+		invent [;
+				if (self has salted) {self.short_name = "текила (с солью)";} else {self.short_name = "текила";}
+			],
+		before [;
+			Touch: "Ты засовываешь пальцы в рюмку и болтаешь ими в текиле. Потом вытаскиваешь и облизываешь.";
+			Drink: if (glass in left || glass in right) {drunk = drunk + 10; shots++; give self absent; remove self; give glass ~full; give glass ~salted; give self ~salted; "Ты прикладываешь рюмку к губам, запрокидываешь голову и, щурясь на яркие лампы, проглатываешь маслянистую жидкость.";} else {"Ты вытягиваешь губы в трубочку и пытаешься высосать текилу из стоящей на стойке рюмки. Хм. Без рук не получается.";}
+			Salting, SaltingT: give self salted; if (glass in left || glass in right) {"Ты сыпешь в текилу соль и, подняв рюмку к свету, заворожённо наблюдаешь, как крохотные кристаллики медленно опускаются на дно рюмки.";} else {"Ты сыпешь в текилу соль и, оперевшись подбородком на стойку, заворожённо наблюдаешь, как крохотные кристаллики медленно опускаются на дно рюмки.";}
+			Drop: <<Drop glass>>;
+			Take: <<Take glass>>;
+			PutOn: <<PutOn glass second>>;
+			Receive: <<Insert noun glass>>;
+			!Remove: "Ты уже было собираешься вылить текилу на пол, но во время одумываешься.";
+		],
+	has female;
+		
+Prop -> bar "бар/"
+	with name "бар" "помещен" "комнат",
+		description "Небольшое уютное помещение с несколькими столиками и барной стойкой. Освещение приглушённое, ярко освещена лишь стена за стойкой, занятая полками с бесчисленным количеством бутылок и часами.",
+	has male;
+	
+Prop -> barman "бармен/"
+	with name "бармен" "человек" "мал",
+		description "Улыбчивый малый, двигающийся с ловкостью и скоростью ниндзя.",
+		before [;
+			Talk: print "@<<Вас рассчитать?@>> — неожиданно спрашивает он, и ты в раздумьях о том, что, похоже, выглядишь более пьяным, чем себя чувствуешь, отвечаешь ему:^^";
+				if (YesOrNo()) {"@<<Да, пожалуйста@>>.";} else {"@<<Нет, спасибо@>>.";}
+			Kiss: "Ты вдруг думаешь, какой же всё-таки отличный парень, этот бармен, и уже было тянешься, чтобы его по-дружески расцеловать, но он уже в другом конце стойки наливает кому-то пива.";
+		]
+	has male animate;
+	
+Prop -> tables "столик/и"
+	with name "столик" "посетител" "клиент" "стол",
+		description "Все столики заняты. Вновь прибывшие или идут к стойке, или уходят ни с чем.",
+	has pluralname;
+	
+Prop -> bottles "бутылк/и"
+	with name "бутылк" "полк" "стен" "алкогол" "виски" "мартини" "абсент" "коньяк" "водк" "ликер",
+		description "Подсвеченные полки заставлены бутылками с выпивкой на любой вкус: американский, шотландский, ирландский виски, обойма бутылок мартини, цветная радуга ликёров, дорогие и не очень коньяки, водка и несколько квадратных бутылок текилы. Один лишь вид этого сверкающего великолепия грозит хроническим алкоголизмом.",
+	has pluralname;
+	
+Prop -> clock "час/ы"
+	with name "час" "время",
+		description [; print "Над барменом висят большие часы с тремя циферблатами, показывающими время для разных городов. Так, в Лондоне сейчас "; clockwork(-5); print ", в Мюнхене "; clockwork(-4); print ". А вот местное уже "; clockwork(); ".";],
+	has pluralname;
+
+Prop -> lamps "ламп/ы"
+	with name "ламп" "свет" "дым" "клуб",
+		description "Над барной стойкой висят несколько ламп. В конусах их света клубятся облака сигаретного дыма.",
+	has pluralname;
+
+Prop -> toilet "туалет/"
+	with name "туалет",
+		description "В дальней стене, за ширмой находится дверь в туалет, но тебе туда совсем не хочется.",
+	has male;
+	
+Hand left "лев/ая рук/а"
+	with name "лев",
+		short_name "левая рука",
+		description [; if (self has salted) {"Твоя левая рука с кучкой соли на тыльной стороне.";} else {"Твоя левая рука.";};],
+		invent [;
+				if (self has salted) {self.short_name = "левая рука (с солью)";} else {self.short_name = "левая рука";}
+			],
+		before [;
+			
+		],
+	has ;
+	
+Hand right "прав/ая рук/а"
+	with name "прав",
+		short_name "правая рука",
+		description [; if (self has salted) {"Твоя правая рука. С кольцом на безымянном пальце и кучкой соли на тыльной стороне.";} else {"Твоя правая рука. С кольцом на безымянном пальце.";}],
+		invent [;
+				if (self has salted) {self.short_name = "правая рука (с солью)";} else {self.short_name = "правая рука";}
+			],
+		before [;
+			
+		],
+	has ;	
+	
+Object salt_daemon
+	with daemon [;
+			minutes++;
+			if (minutes == 60) {hours++; minutes = 0;}
+			if (hours == time_type) {hours = 0;}
+			if (whathand == 1 && right has salted) {give right ~salted; "^В процессе с твоей правой руки рассыпается вся соль.";}
+			if (whathand == 2 && left has salted) {give left ~salted; "^В процессе с твоей левой руки рассыпается вся соль.";} 
+			if (glass hasnt full && glass in counter) {give tequila ~absent; move tequila to glass; give glass full; "^Бармен ловким движением наполняет твою рюмку.";}
+			if (lime has absent) {give lime ~absent; move lime to plate; "^Бармен выкладывает на тарелку ещё пару ломтиков, один из которых тут же подцепляет твой товарищ.";}
+			whathand = 0;
+		];
+
+[Clockwork z h m; 
+	h = hours + z;
+	m = minutes;
+	if (h >= time_type) {h = h - time_type;}
+	if (h < 0) {h = 24+h;}
+	if (h < 10) {print "0", h;} else {print h;}
+	print ":";
+	if (m < 10) {print "0", m;} else {print m;}
+];
+
+[DeathMessage; print "Продолжение вряд ли следует";];
+
+!============================================================================
+! Stanard and extended grammar
+
+Include "RussiaG";
+
+!! "creature" in instrumental
+[ cIns_creat;	return c_token (CREATURE_TOKEN, csIns);	];
+
+!============================================================================
+! Глаголы
+
+!----------------------------------------------------------------------------
+
+[ TalkSub;
+	if (noun == player || noun == nothing) { 
+	!	"~Горы, каменные матери, гордитесь своими детьми,~ - неслышно шепчешь ты простенькую молитву.";
+	}
+	if (RunLife(noun,##Talk) ~= false) return;  ! consult life[; Talk: ]
+	"Ты не можешь придумать, о чём бы можно было поговорить.";
+];
+
+[ SaltingSub;];
+[ SaltingTSub;];
+[ ReadSub; <<Examine noun>>; ];
+[ LickSub; <<Taste noun>>; ];
+
+Extend 'ес' first * cAcc_Noun			-> Eat;
+
+Extend 'чит' first * cAcc_noun		 -> Read;
+
+Extend 'лиз' first * cAcc_noun				-> Lick
+		* cNom_noun 'с'/'со' cGen_noun		-> Lick
+		* 'с'/'со' cGen_noun cNom_noun		-> Lick reverse;
+		
+Verb 'закус'
+	* cIns_noun 				-> Eat;
+
+Verb 'говор' 'обща' 'болт' 'разговар' 'крич' 'крик'
+	*         					-> Talk
+	* 'с' cIns_creat				-> Talk;
+	   
+Verb 'убра'
+	* cAcc_held				-> Insert
+	* cAcc_held 'в'/'во' cAcc_noun		-> Insert
+	* 'в'/'во' cAcc_noun cAcc_held		-> Insert reverse;
+	
+Verb	'насып' 'посып' 'просып' 'посол'
+                * cAcc_noun					-> Salting
+                * cAcc_noun 'в'/'во'/'на' cAcc_noun	-> SaltingT
+		* cNom_noun cAcc_noun			-> SaltingT					!только для соли!
+		* cAcc_noun cNom_noun			-> SaltingT reverse			!только для соли!
+                * 'в'/'во'/'на' cAcc_noun cAcc_noun	-> SaltingT reverse;
+		
+Verb	'опустош' 'опорожн'
+                * cAcc_noun					-> Empty
+                * cAcc_noun 'в'/'во'/'на' cAcc_noun	-> EmptyT
+                * 'в'/'во'/'на' cAcc_noun cAcc_noun	-> EmptyT reverse;
+
+Verb	'обн' 'расцел' 'поцел' 'расцелов' 'поцелов'
+                * cAcc_creat			-> Kiss;
+
+![ MegaExam obj; print "^", (a) obj, ": "; <Examine obj>; ];
+![ MegaLookSub; <Look>; LoopOverScope(MegaExam); ];
+!Verb meta ’megalook’ * -> MegaLook;
+
+!----------------------------------------------------------------------------

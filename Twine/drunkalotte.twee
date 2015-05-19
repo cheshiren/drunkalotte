@@ -1,0 +1,879 @@
+﻿/%
+Banner
+http://patorjk.com/software/taag/#p=display&f=Banner
+%/
+
+:: StoryTitle
+	Наливайя
+
+:: StoryAuthor
+	[[Вячеслав Добранов|http://cheshire.ifiction.ru/]]
+
+:: StoryInit
+<<display "BasicRecipeInit">>
+<<display "DeepBombInit">>
+<<display "PalomaChaserInit">>
+<<set $historyArr = []>>
+<<set $drunkness = 60>>
+/%<<set $AllGodsNames = ["Бесстрашный экспериментатор", "Гениальный комик", "Ловкий акробат", "Танцор от бога", "Непобедимый герой", "Одарённый певец", "Душа вечеринки", "Король мира", "Император вселенной", "Мертвец"]>>%/
+<<set $AllGodsNames = ["Бесстрашный экспериментатор", "Непобедимый герой", "Одарённый певец", "Душа вечеринки", "Король мира", "Император вселенной", "Мертвец"]>>
+
+:: NULL
+
+:: MenuStory
+	<hr>
+	<span id="beta"></span>
+	<hr>
+
+:: Recipes
+	Текила с лаймом и солью
+Налей в стопку серебряную текилу 50 мл
+Смочи долькой лайма руку между большим и указательным пальцем
+Посыпь это место солью
+Лизни соль, выпей шот и заверши его лаймом
+
+	Глубинная бомба
+Налей в хайбол пиво светлое на 2/3
+Налей в стопку золотую текилу 15 мл
+Подожги и опусти стопку в хайбол с пивом
+	
+	Палома чейзер
+Литрового кувшина чейзера хватит, чтобы запить 20 стопок текилы
+Налей в кувшин медовый сироп 10 мл и грейпфрутовый сок 30 мл
+Выжми лайм 0,5 шт
+Добавь щепотку соли
+Размешай коктейльной ложкой
+Разлей золотую текилу по стопкам
+Разлей чейзер по стопкам
+Выпей текилу и запей чейзером
+
+:: Start [nobr]
+<div id="disclaimer"><table><tr><th><div id="plus18">18+</div></th></tr><tr><th style="vertical-align:top"><div id="warning">Употребление алкоголя вредит вашему здоровью<br><br>[[Я осознаю это|BasicRecipe][$recipe = "BasicRecipe"]]</div></th></tr></table></div>
+
+:: Start2
+	Часы над головой бармена показывают, что прошло уже три часа с тех пор, как ты зашёл в этот бар. Конечно, изначально ты планировал лишь спокойно выпить чашечку кофе после тяжёлого трудового дня, может быть, выкурить пару сигарет, а потом вернуться домой к ужину. Однако, как это часто бывает в этих делах, все планы были разрушены встречей со старым приятелем. В результате, после шести кружек пива, двух гневных звонков из дома и трёх походов в туалет, кто-то из вас высказал предложение поэкспериментировать.
+	Вы подозвали бармена и спросили его о каком-нибудь достойном коктейле, который можно попробовать двум взрослым мужчинам.
+	«Замечательно, что вы спросили, — ответствовал он с широкой улыбкой. — В этом месяце наш бар проводит акцию „Выстрел в ногу“. Её суть следующая: у меня есть список из нескольких коктейлей на основе текилы, которые вы должны выпить. Если у вас это получается, то бар полностью берёт на себя весь ваш счёт».
+	Вы с приятелем переглядываетесь: «А в чём подвох?»
+	Улыбка бармена становится ещё шире: «Коктейли вы готовите себе сами. Засчитываются только правильно приготовленные напитки, но вы обязаны выпить всё, что смешаете».
+	Снова переглянувшись и пожав плечами, вы просите показать список.
+
+	[[Поехали!|Start3]]
+	/%<<display "MainScreen">>%/
+
+/%:: Start3
+	<<print "<span id="+$loc+">???</span>">>
+	<br>	«Пожалуйста, — говорит бармен и выкладывает перед вами броско оформленный картонный лист. — Всего вы должны приготовить и выпить шесть коктейлей. В нескольких случаях у вас есть выбор, например, можете остановиться на „Эль Бандито“ вместо „Глубинной бобмы“ — он легче в приготовлении. Выбирайте коктейль и я расскажу, как его смешивать».
+<center>
+|!<center>№</center>|!<center>Название</center>|!<center>Сложность</center>|!<center>Крепость</center>|
+|<center>1</center>|Текила с лаймом и солью|<center>★★☆</center>|<center>★★☆</center>|
+|<center>2</center>|Текила бум|<center>★★☆</center>|<center>★★☆</center>|
+|<center>3</center>|Эль Бандито|<center>★★☆</center>|<center>★★★</center>|
+|~|Глубинная бомба|<center>★★☆</center>|<center>★★★</center>|
+|<center>4</center>|Золотое дно|<center>★★☆</center>|<center>★★☆</center>|
+|~|Борец|<center>★★☆</center>|<center>★★☆</center>|
+|<center>5</center>|Апельсиновый чейзер|<center>★★☆</center>|<center>★★☆</center>|
+|~|Палома чейзер|<center>★★☆</center>|<center>★★☆</center>|
+|<center>6</center>|Красный пёс|<center>★★☆</center>|<center>★★☆</center>|
+</center>%/
+:: Start3
+	«Пожалуйста, — говорит бармен и выкладывает перед вами броско оформленный картонный лист. — Всего вы должны приготовить и выпить три коктейля. Выбирайте какой-нибудь и я расскажу, как его смешивать».
+<<display "Table">>
+
+:: Table
+<center>
+|!<center>№</center>|!<center>Название</center>|!<center>Сложность</center>|!<center>Крепость</center>|
+|<center>1</center>|[[Текила с лаймом и солью|StartWithExplanations][$recipe = "BasicRecipe"]]|<center>★★☆</center>|<center>★★☆</center>|
+|<center>2</center>|[[Глубинная бомба|StartWithExplanations][$recipe = "DeepBomb"]]|<center>★☆☆</center>|<center>★★★</center>|
+|<center>3</center>|[[Палома чейзер|StartWithExplanations][$recipe = "PalomaChaser"]]|<center>★★★</center>|<center>★★☆</center>|
+<br></center>
+
+:: StartWithExplanations [nobr]
+	<<if $recipe == "BasicRecipe">>
+		«Это самый известный способ пить текилу — вы, наверняка, его знаете. У вас будет долька лайма, соль и стопка текилы. Нужно лаймом намочить руку, вот здесь, — он показывает на место между большим и указательным пальцами своей руки. — И затем посыпать её солью. И всё. Дальше только три быстрых действия: слизываете соль, выпиваете текилу и закусываете лаймом. Правда, легко? Начнёте с этого рецепта?»
+	<<elseif $recipe == "DeepBomb">>
+		«Глубинная бомба — очень простой в приготовлении коктейль. В высокий стакан наливаете на две трети светлого лагера и аккуратно опускаете в него стопку с текилой. Когда стопка опускается на дно стакана, начинаете пить пиво и, в конце концов, текилу. Только медленно, чтобы стопкой не ударило по зубам. Вот и весь рецепт. Начнёте с этого коктейля?»
+	<<elseif $recipe = "PalomaChaser">>
+		«В Паломе много составляющих, поэтому он считается относительно сложным. В стопку наливаете медовый сироп, 10 мл., затем добавляете грейпфрутовый сок, 30 мл. Туда же выжимаете половинку лайма и сыпите щепотку соли. Перемешиваете коктейльной ложкой. Всё, чейзер готов. Выпиваете стопку текилы и запиваете стопкой чейзера. Будете начинать с него?»
+	<</if>>
+	<br><br>
+	[[Поехали-поехали!|$recipe]]
+	<br>
+	[[А что там по другим коктейлям?|Table]]
+
+:: Hint [nobr]
+	<br><br>
+	<<if $recipe == "BasicRecipe">>
+		...лаймом намочить руку, посыпать её солью, слизать соль, выпить текилу, закусить лаймом...
+	<<elseif $recipe == "DeepBomb">>
+		...налить 2/3 светлого лагера в стакан, опустить туда стопку, всё выить...
+	<<elseif $recipe = "PalomaChaser">>
+		...в стопку влить 10 мл. медового сиропа, 30 мл. грейпфрутового сока, выжать половинку лайма, добавить щепотку соли, перемешать коктейльной ложкой, выпить текилу, запить чейзером...
+	<</if>>
+
+:: HowDrunkAreYou [nobr]
+	<<set $i = $drunkness/10-6>>
+	Опьянение: <<print $drunkness>>% [<<print $AllGodsNames[$i]>>]
+
+
+/%
+		   #####                                                                       
+		  ##  ##            ##                                                         
+		  ##  ##  ####   ##   ## ##   ##    ##   ##     #####   #####    ##### ##      
+		  ##  ##     ##  ##  ### ### ###    ##  ###    ##      ##   ##  ##  ## ##      
+		  ##  ##  #####  ## # ## ## # ##    ## # ##    ##      ##   ##  ##  ## ######  
+		  ##  ## ##  ##  ###  ## ##   ##    ###  ##    ##      ##   ##  ##  ## ##   ## 
+		 ##   ##  ###### ##   ## ##   ##    ##   ##     #####   #####  ##   ## ######  
+%/
+
+:: BasicRecipeInit [nobr]
+<<display "plateInit">>
+<<display "counterInit">>
+<<display "limeInit">>
+<<display "salterInit">>
+<<display "shotInit">>
+<<display "tequilaInit">>
+<<display "handsInit">>
+<<display "lefthandInit">>
+<<display "righthandInit">>
+<<set $recipeName = "Текила с лаймом и солью">>
+:: BasicRecipe [nobr]
+	<div id="commandline"><p id="hint"><<click "Текила с лаймом и солью">><<replace "#events">><<display "Hint">><</replace>><</click>></p><p id="drunkness"><<display "HowDrunkAreYou">></p></div>
+	<span id="inventory" class="notab"><<display "counterInv">> <<display "handsInv">></span>
+	<span id="history" class="notab"></span>
+	<span id="focus" class="notab"></span>
+	<span id="actions" class="notab"></span>
+	<span id="events" class="notab"></span>
+:: BasicRecipeDaemon [nobr]
+	<<if !$plateChildren.contains("lime") and !$lefthandChildren.contains("lime") and !$righthandChildren.contains("lime")>>
+		<<display "limeInit">>
+		<<set $plateChildren.push("lime")>>
+		<<set $BasicRecipeEvent = "Бармен выкладывает на тарелку ещё пару ломтиков лайма, один из которых тут же подцепляет твой товарищ.">>
+	<</if>>
+	<<if !$shotChildren.contains("tequila") and $counterChildren.contains("shot")>>
+		<<display "tequilaInit">>
+		<<set $shotChildren.push("tequila")>>
+		<<set $BasicRecipeEvent = "Бармен ловким движением наполняет твою стопку.">>
+	<</if>>
+	<<if !$counterChildren.contains("salter") and !$lefthandChildren.contains("salter") and !$righthandChildren.contains("salter")>>
+		<<display "salterInit">>
+		<<set $counterChildren.push("salter")>>
+		<<set $BasicRecipeEvent = "Бармен ставит перед тобой новую солонку.">>
+	<</if>>
+
+
+:: handsInit [nobr]
+	<<set $handsChildren = ["lefthand", "righthand"]>>
+	<<set $handsName = "руки">>
+:: handsDesc [nobr]
+:: handsInv [nobr]
+	<<if $lefthandChildren[0]>>
+		<<print "<<set $helper = '"+$lefthandChildren[0]+"Inv'>>">>
+		В <<object "левой" "lefthand">> руке у тебя <<display $helper>>, 
+	<<else>>
+		<<object "Левой" "lefthand">> рукой ты хлопаешь по колену в ритм блюзовой партии, что доносится из динамиков, 
+	<</if>>
+	<<if $righthandChildren[0]>>
+		<<print "<<set $helper = '"+$righthandChildren[0]+"Inv'>>">>
+		в <<object "правой" "righthand">> <<print ($lefthandChildren[0] ? "—" : "руке у тебя")>> <<display $helper>>.
+	<<else>>
+		<<object "правой" "righthand">> барабанишь по стойке.
+	<</if>>
+:: handsTakeFull [nobr]
+	Ты не уверен, но, кажется, обе твои руки заняты.
+
+
+:: lefthandInit [nobr]
+	<<set $lefthandChildren = []>>
+	<<set $lefthandName = "левая рука">>
+	<<set $lefthandNameG = "левую руку">>
+	<<set $lefthandParent = "hands">>
+	<<unset $lefthandDisabled $lefthandSalted $lefthandLimed>>
+:: lefthandDesc [nobr]
+	Твоя левая рука.
+	<<if $lefthandLimed>>
+		 Смоченная соком лайма
+		<<if $lefthandSalted>>
+		 и посыпанная солью
+		<</if>>
+		.
+	<</if>>
+	<<if $lefthandChildren[0]>>
+		<<print "<<set $helper = $"+ $lefthandChildren[0] +"NameG>>">>
+		 В ней ты держишь <<object $helper $lefthandChildren[0]>>.
+	<</if>>
+:: lefthandInv [nobr]
+:: lefthandAct [nobr]
+	<<if $lefthandLimed && $lefthandSalted>>
+		<br><br>
+		<<Lick "lefthand" "Слизнуть соль">>
+	<</if>>
+:: lefthandSalt [nobr]
+	<<if $salterParent != "lefthand">>
+		<<if $lefthandLimed>>
+			Ты насыпаешь немного соли на <<object "левую руку" "lefthand">>, там, где она была смочена <<object "лаймом" "lime">>.
+		<<else>>
+			Ты сыпешь соль на участок между большим и указательным пальцами <<object "левой руки" "lefthand">>, но она немедленно ссыпается оттуда.
+			<<set $lefthandSalted = 0>>
+		<</if>>
+	<<else>>
+		Ты пытаешься посыпать солью ту же <<object "руку" "lefthand">>, в которой держишь солонку, но, естественно, ничего не выходит.
+		<<set $lefthandSalted = 0>>
+	<</if>>
+:: lefthandLime [nobr]
+	<<if $limeParent != "lefthand">>
+		Долькой лайма ты смачиваешь <<object "левую руку" "lefthand">> на участке между большим и указательным пальцами.
+	<<else>>
+		Ты несколько минут пытаешься намочить соком лайма ту же <<object "руку" "lefthand">>, в которой этот лайм держишь. Безуспешно.
+		<<set $lefthandLimed = 0>>
+	<</if>>
+:: lefthandLick [nobr]
+	Ты слизываешь всю соль с левой руки.
+
+
+:: righthandInit [nobr]
+	<<set $righthandChildren = []>>
+	<<set $righthandName = "правая рука">>
+	<<set $righthandNameG = "правую руку">>
+	<<set $righthandParent = "hands">>
+	<<unset $righthandDisabled $righthandSalted $righthandLimed>>
+:: righthandDesc [nobr]
+	Твоя правая рука. С кольцом на безымянном пальце.
+	<<if $righthandLimed>>
+		 Смоченная соком лайма
+		<<if $righthandSalted>>
+		 и посыпанная солью
+		<</if>>
+		.
+	<</if>>
+	<<if $righthandChildren[0]>>
+		<<print "<<set $helper = $"+ $righthandChildren[0] +"NameG>>">>
+		 В руке ты держишь <<object $helper $righthandChildren[0]>>.
+	<</if>>
+:: righthandInv [nobr]
+:: righthandAct [nobr]
+	<<if $righthandLimed && $righthandSalted>>
+		<br><br>
+		<<Lick "lefthand" "Слизнуть соль">>
+	<</if>>
+:: righthandSalt [nobr]
+	<<if $salterParent != "righthand">>
+		<<if $righthandLimed>>
+			Ты насыпаешь немного соли на <<object "правую руку" "righthand">>, там, где она была смочена <<object "лаймом" "lime">>.
+		<<else>>
+			Ты сыпешь соль на участок между большим и указательным пальцами <<object "правой руки" "righthand">>, но она немедленно ссыпается оттуда.
+			<<set $righthandSalted = 0>>
+		<</if>>
+	<<else>>
+		Ты пытаешься посыпать солью ту же <<object "руку" "righthand">>, в которой держишь солонку, но, естественно, ничего не выходит.
+		<<set $righthandSalted = 0>>
+	<</if>>
+:: righthandLime [nobr]
+	<<if $limeParent != "righthand">>
+		Долькой лайма ты смачиваешь <<object "правую руку" "righthand">> на участке между большим и указательным пальцами.
+	<<else>>
+		Ты несколько минут пытаешься намочить соком лайма ту же <<object "руку" "righthand">>, в которой этот лайм держишь. Безуспешно.
+		<<set $righthandLimed = 0>>
+	<</if>>
+:: righthandLick [nobr]
+	Ты слизываешь всю соль с правой руки.
+
+
+:: counterInit [nobr]
+	<<set $counterChildren = ["plate", "salter", "shot"]>>
+	<<set $counterName = "барная стойка">>
+	<<set $counterNameG = "барную стойку">>
+	<<unset $counterDisabled $counterSalted $counterLimed>>
+:: counterDesc [nobr]
+	Лакированная деревянная поверхность, покрытая патиной от многолетних прикосновений, ударов, разлитий.<<if $counterSalted>> С рассыпанной повсюду солью<<if $counterLimed>>, тающей в лужицах лаймового сока<</if>>.<</if>><<if !$counterSalted && $counterLimed>> С лужицами сока лайма повсюду.<</if>>
+:: counterInv [nobr]
+	На <<object "барной стойке" "counter">> перед тобой <<print ($counterChildren.length == 1 ? "стоит" : "стоят")>>
+	<<for $i = 0; $i < $counterChildren.length; $i++>>
+		<<print "<<display "+$counterChildren[$i]+"Inv>>">>
+		<<if $i < $counterChildren.length-2>>
+			<<print ", ">>
+		<<elseif $i < $counterChildren.length-1>>
+			<<print " и ">>
+		<</if>>
+	<</for>>
+	.
+:: counterSalt [nobr]
+	Ты рассыпаешь соль по всей поверхности <<object "стойки" "counter">>, до которой можешь дотянуться.
+:: counterLime [nobr]
+	Ты сдавливаешь лайм в пальцах и водишь рукой над <<object "стойкой" "counter">>, разбрызгивая повсюду сок.
+
+
+:: plateInit [nobr]
+	<<set $plateChildren = ["lime"]>>
+	<<set $plateName = "тарелка">>
+	<<set $plateNameG = "тарелку">>
+	<<set $plateParent = "counter">>
+	<<unset $plateDisabled $plateSalted>>
+	<<set $plateLimed = 1>>
+:: plateDesc [nobr]
+	Неглубокая белая тарелка, мокрая от сока <<object "лайма" "lime">><<print ($plateSalted ? ", в котором растворяются кристаллики соли" : "")>>.
+:: plateInv [nobr]
+	<<if $plateChildren.contains("lime")>>
+		<<object "тарелка" "plate">> с одним кусочком <<object "лайма" "lime">>
+	<<else>>
+		пустая <<object "тарелка" "plate">>
+	<</if>>
+:: plateSalt [nobr]
+	Ты, прищурившись, рассыпаешь соль по всей <<object "тарелке" "plate">>
+	<<if $plateChildren.contains("lime")>>
+		 и по лежащему на ней <<object "лайму" "lime">>
+		<<set $limeSalted = 1>>
+	<</if>>
+	.
+:: plateLime [nobr]
+	Ты собираешься было поводить лаймом по <<object "тарелке" "plate">>, но замечаешь, что она и так вся мокрая.
+
+
+:: limeInit [nobr]
+	<<set $limeChildren = []>>
+	<<set $limeName = "кусочек лайма">>
+	<<set $limeNameG = "кусочек лайма">>
+	<<set $limeParent = "plate">>
+	<<unset $limeDisabled $limeSalted>>
+:: limeDesc [nobr]
+	Аккуратно отрезанная долька лайма. Его зелёная кожура поблёскивает в свете ламп. <<print ($limeSalted ? "Зачем-то посолен." : "")>>
+:: limeInv [nobr]
+	кусочек <<object "лайма" "lime">>
+:: limeAct [nobr]
+	<br><br>
+	<<if $limeParent != "lefthand" and $limeParent != "righthand">>
+		<<Take "lime">><br>
+		<<NoActVerb "lime" "Съесть кусочек лайма" "limeEatFail">>
+	<<else>>
+		<<Eat "lime">><br>
+		<<LimeSmthng>><br>
+		<<PutOn "lime" "plate" "вернуть" "на">><br>
+		<<ChangeHands "lime">>
+	<</if>>
+:: limeEatFail [nobr]
+	Наклонившись над тарелкой, ты пытаешься зацепить дольку лайма одними губами и языком. Не выходит.
+:: limeEat [nobr]
+	Ты отправляешь лайм в рот и, жмурясь, пережёвываешь его.
+:: limeSalt [nobr]
+	Ты аккуратно сыпешь несколько крупинок соли на <<object "лайм" "lime">>.
+:: limeLime [nobr]
+	Ты крепко задумываешься на несколько секунд.
+
+
+:: salterInit [nobr]
+	<<set $salterChildren = []>>
+	<<set $salterName = "солонка">>
+	<<set $salterNameG = "солонку">>
+	<<set $salterParent = "counter">>
+	<<unset $salterDisabled $salterLimed>>
+:: salterDesc [nobr]
+	Белая керамическая солонка со множеством дырочек наверху и названием бара сбоку: «GIN & JAZZ».<<print ($salterLimed ? " Дырочки, кстати, намертво забиты мокрой солью." : "")>>
+:: salterInv [nobr]
+	<<object "солонка" "salter">>
+:: salterAct [nobr]
+	<br><br>
+	<<if $salterParent != "lefthand" and $salterParent != "righthand">>
+		<<Take "salter">>
+		<<if $salterLimed>>
+			<br>
+			<<RemoveVerb "salter" "Попросить поменять солонку" "salterChange">>
+		<</if>>
+	<<else>>
+		<<if $salterLimed>>
+			<<NoActVerb "slater" "Посолить что-нибудь" "salterSaltFail">><br>
+			<<RemoveVerb "salter" "Попросить поменять солонку" "salterChange">><br>
+		<<else>>
+			<<SaltSmthng>><br>
+		<</if>>
+		<<PutOn "salter" "поставить">><br>
+		<<ChangeHands "salter">>
+	<</if>>
+:: salterSalt [nobr]
+	Ты крепко задумываешься на несколько секунд.
+:: salterLime [nobr]
+	Ты самозабвенно размазываешь сок лайма по всей <<object "солонке" "salter">> и не сразу замечаешь, что он попал в отверстия, из которых должна сыпаться соль. Ой.
+:: salterChange [nobr]
+	Ты подзываешь бармена и как можно более обтекаемо описываешь проблему с солонкой. Он понимающе кивает, забирает испорченную солонку и уходит за новой.
+:: salterSaltFail [nobr]
+	Ты собираешься было что-нибудь посолить, как вспоминаешь, что все дырочки на солонке заклеились соком лайма.
+
+
+:: shotInit [nobr]
+	<<set $shotChildren = ["tequila"]>>
+	<<set $shotName = "стопка">>
+	<<set $shotNameG = "стопку">>
+	<<set $shotParent = "counter">>
+	<<unset $shotDisabled $shotSalted $shotLimed>>
+:: shotDesc [nobr]
+	Стеклянный полый цилиндр с толстым дном
+	<<if $shotChildren.contains("tequila")>>
+		, наполненный прозрачной <<object "текилой" "tequila">>.
+	<<else>>
+		. Пустой.
+	<<endif>>
+	<<print ($shotSalted ? " На дне видны несколько медленно растворяющихся кристалликов соли." : "")>>
+:: shotInv [nobr]
+	<<if $shotChildren[0] == "tequila">>
+		пятидесятиграммовая <<object "стопка" "shot">> с <<object "текилой" "tequila">>
+	<<else>>
+		пустая пятидесятиграммовая <<object "стопка" "shot">>
+	<</if>>
+:: shotAct [nobr]
+	<br><br>
+	<<if $shotParent != "lefthand" and $shotParent != "righthand">>
+		<<Take "shot">>
+	<<else>>
+		<<if $shotChildren[0]>>
+			<<Drink "tequila">><br>
+		<</if>>
+		<<PutOn "shot" "поставить">><br>
+		<<ChangeHands "shot">>
+	<</if>>
+:: shotSalt [nobr]
+	<<if $shotChildren[0]>>
+		<<display "tequilaSalt">>
+		<<set $tequilaSalted = 1>>
+	<<else>>
+		Ты сыпешь немного соли в пустую <<object "стопку" "shot">>.
+	<</if>>
+:: shotLime [nobr]
+	Ты задумчиво поводишь лаймом по кромке <<object "стопки" "shot">>.
+
+
+:: tequilaInit [nobr]
+	<<set $tequilaChildren = []>>
+	<<set $tequilaName = "текила">>
+	<<set $tequilaNameG = "текилу">>
+	<<set $tequilaParent = "shot">>
+	<<unset $tequilaDisabled $tequilaSalted $tequilaLimed>>
+:: tequilaDesc [nobr]
+	Прозрачная маслянистая жидкость. Её поверхность красиво отражает свет ламп над стойкой.
+:: tequilaInv [nobr]
+	<<object "текила" "tequila">>
+:: tequilaAct [nobr]
+	<br><br>
+	<<if $shotParent != "lefthand" and $shotParent != "righthand">>
+		<<NoActVerb "tequila" "Выпить текилу" "tequilaDrinkFail">>
+	<<else>>
+		<<Drink "tequila">>
+	<</if>>
+:: tequilaDrinkFail [nobr]
+	Ты вытягиваешь губы в трубочку и пытаешься высосать текилу из стоящей на стойке <<object "стопки" "shot">>. Хм. Без рук не получается.
+:: tequilaDrink [nobr]
+	Ты прикладываешь стопку к губам, запрокидываешь голову и, щурясь на яркие лампы, проглатываешь маслянистую жидкость.
+	<<set $drunkness += 10>>
+:: tequilaSalt [nobr]
+	<<if $shotParent == "counter">>
+		Ты сыпешь в <<object "текилу" "tequila">> соль и, оперевшись подбородком на <<object "стойку" "counter">>, заворожённо наблюдаешь, как крохотные кристаллики медленно опускаются на дно <<object "стопки" "shot">>.
+	<<elseif $shotParent == "lefthand" or $shotParent == "righthand">>
+		Ты сыпешь в <<object "текилу" "tequila">> соль и, подняв <<object "стопку" "shot">> к свету, заворожённо наблюдаешь, как крохотные кристаллики медленно опускаются на дно.
+	<</if>>
+:: tequilaLime [nobr]
+	Ты выдавливаешь пару капель лаймового сока в <<object "текилу" "tequila">>, пока бармен не видит. Ну и что, что в рецепте коктейля этого не было, правда?
+
+
+/%
+		 #######                                                                                                            
+		 ##                          ##                                                 ##                      ##          
+		 ##        ##### ##   ##  ####   ##   ## ##   ## ##   ##  ####     #####     ####    #####  ##   ##  ####    ####   
+		 ##       ##  ## ##   ## ##      ##  ### ##   ## ##   ##     ##   ##  ##    ##      ##   ## ### ### ##          ##  
+		 ##       ##  ## ##   ## ######  ## # ## ####### #######  #####    #####    ######  ##   ## ## # ## ######   #####  
+		 ##       ##  ##  ###### ##   ## ###  ## ##   ## ##   ## ##  ##   ##  ##    ##   ## ##   ## ##   ## ##   ## ##  ##  
+		 ##      ##   ##      ##  #####  ##   ## ##   ## ##   ##  ###### ##   ##     #####   #####  ##   ##  #####   ###### 
+		                  #####                                                                                            
+%/
+
+:: DeepBombInit [nobr]
+
+
+/%
+		 #######                                                                                            
+		 ##   ##                                                               ##                           
+		 ##   ##  ####     #####  #####  ##   ##  ####      ##   ##  #####  ##   ##  #####   #####  ######  
+		 ##   ##     ##   ##  ## ##   ## ### ###     ##     ##   ## ##   ## ##  ### ##   ## ##   ## ##   ## 
+		 ##   ##  #####   ##  ## ##   ## ## # ##  #####      ###### ######  ## # ##    ###  ######  ######  
+		 ##   ## ##  ##   ##  ## ##   ## ##   ## ##  ##          ## ##      ###  ## ##   ## ##      ##      
+		 ##   ##  ###### ##   ##  #####  ##   ##  ######         ##  #####  ##   ##  #####   #####  ##     
+%/
+
+:: PalomaChaserInit [nobr]
+
+
+
+
+
+
+
+
+
+
+/%
+		 ######                                                  
+		 ##   ##           ####                                  
+		 ##   ## ##   ##      ## ## # ##  #####  ######  ##   ## 
+		 ######  ##  ###   #####  # # #  ##   ##   ##    ##   ## 
+		 ##   ## ## # ##  ##  ##   ###   ######    ##    ####  # 
+		 ##   ## ###  ## ##   ##  # # #  ##        ##    ##  # # 
+		 ######  ##   ##  #####  ## # ##  #####    ##    ####  #
+ %/
+
+:: MahWidgets [widget nobr]
+<<widget "object">><<click $args[0]>>
+		<<if $MODE>>
+			<<removeclass "#inventory" "fluence">>
+			<<removeclass "#history" "fluence">>
+			<<removeclass "#focus" "fluence">>
+			<<removeclass "#actions" "turnoff">>
+			/%<<removeclass "#hint" "turnoff">>%/
+			<<if $MODE == "salting">>
+				<<saltingmode $args[1]>>
+			<<elseif $MODE == "liming">>
+				<<limingmode $args[1]>>
+			<</if>>
+			<<set $MODE = "">>
+		<<else>>
+			<<print "<<set $recipeDaemon = '"+$recipe+"Daemon'>>">> /% запоминаем демона локации %/
+			<<display $recipeDaemon>> /% показываем демона локации %/
+			<<print "<<set $recipeEvent = $"+$recipe+"Event>>">>
+			<<if $historyArr.contains($args[1])>> /% если в списке истории уже есть этот объект, удаляем его оттуда %/
+				<<set $historyArr.splice($historyArr.indexOf($args[1]), 1)>>
+			<</if>>
+			<<print "<<set $objectDisabled = $"+$focus+"Disabled>>">>
+			<<if $focus && $focus != $args[1] && !$objectDisabled>> /% если уже есть объект в старом фокусе и этот объект не равен объекту в фокусе новом и не отключён, перемещаем его в историю %/
+				<<set $historyArr.push($focus)>>
+			<<endif>>
+			<<set $focus = $args[1]>> /% обновляем фокус %/
+			<<history>> /% обновляем историю %/
+			<<replace "#focus">> /% выводим данные объекта в фокусе %/
+				<br><br>
+				<<print "<<set $objectName = $"+$args[1]+"Name>>">>
+				<<print "<<set $objectDesc = '"+$args[1]+"Desc'>>">>
+				<<print "<<set $objectAct = '"+$args[1]+"Act'>>">>
+				<<set $objectName = $objectName.charAt(0).toUpperCase()+$objectName.slice(1)>> /% у имени объекта делаем первую букву заглавной %/
+				• ''<<print $objectName>>'' /% выводим имя %/
+				<br>
+				<<display $objectDesc>> /% выводим описание %/
+			<</replace>>
+			<<replace "#actions">>
+				<<if tale.has($objectAct)>>
+					<<display $objectAct>> /% выводим действия %/
+				<</if>>
+			<</replace>>
+			<<replace "#events">>
+				<<print $recipeEvent>>
+			<</replace>>
+			<<if $recipeEvent>>
+				<<prepend "#events">>
+					<br><br>
+				<</prepend>>
+				<<print "<<set $"+$recipe+"Event = ''>>">>
+			<</if>>
+		<</if>>
+	<</click>><</widget>>
+
+
+/% виджет вывода истории просмотренных объектов %/
+<<widget "history">>
+	<<replace "#beta">><<print $historyArr.toString()>><</replace>>
+	<<replace "#history">> /% для начала сбрасываем существующий текст %/
+	<</replace>>
+	<<if $historyArr.length != 0>> /% если история есть, выводим её %/
+		<<append "#history">><br><br><</append>>
+		<<for $i = 0; $i < $historyArr.length; $i++>> /% перебираем содержимое массива истории %/
+			<<print "<<set $objectName = $"+$historyArr[$i]+"Name>>">>
+			<<set $objectName = $objectName.charAt(0).toUpperCase()+$objectName.slice(1)>> /% у очередногообъекта в истории делаем первую букву заглавной %/
+			<<append "#history">> /% добавляем объект в виде ссылки, если он не последний, ещё и переводим строку %/
+			• <<object $objectName $historyArr[$i]>>
+			<<if $i < $historyArr.length-1>>
+				<br>
+			<</if>>
+			<</append>>
+		<</for>>
+	<</if>>
+<</widget>>
+
+
+/% виджет обновления экрана при действии объекта на объект %/
+<<widget "fluencerefresh">>
+	<<if $MODE>>
+		<<addclass "#inventory" "fluence">>
+		<<addclass "#history" "fluence">>
+		<<addclass "#focus" "fluence">>
+		<<addclass "#actions" "turnoff">>
+		/%<<addclass "#hint" "turnoff">>%/
+	<</if>>
+	<<print "<<set $recipeDaemon = '"+$recipe+"Daemon'>>">>
+	<<display $recipeDaemon>>
+	<<print "<<set $recipeEvent = $"+$recipe+"Event>>">>
+	<<replace "#inventory">>
+		<<display "counterInv">> <<display "handsInv">>
+	<</replace>>
+	<<history>>
+	<<replace "#focus">>
+		<br><br>
+		<<print "<<set $objectName = $"+$focus+"Name>>">>
+		<<print "<<set $objectDesc = '"+$focus+"Desc'>>">>
+		<<set $objectName = $objectName.charAt(0).toUpperCase()+$objectName.slice(1)>>
+		• ''<<print $objectName>>''
+		<br>
+		<<display $objectDesc>>
+	<</replace>>
+	<<replace "#actions">>
+		<<if tale.has($objectAct)>>
+			<<display $objectAct>> /% выводим действия %/
+		<</if>>
+	<</replace>>
+<</widget>>
+
+
+/% виджет обновления экрана по действию %/
+<<widget "actrefresh">>
+	<<print "<<set $recipeDaemon = '"+$recipe+"Daemon'>>">> /% запоминаем демона локации %/
+	<<display $recipeDaemon>> /% показываем демона локации %/
+	<<print "<<set $recipeEvent = $"+$recipe+"Event>>">>
+	<<replace "#inventory">> /% обновляем инвентарную часть описания %/
+		<<display "counterInv">> <<display "handsInv">>
+	<</replace>>
+	<<history>> /% обновляем историю %/
+	<<replace "#focus">> /% выводим описание действия %/
+		<br><br>
+		<<print "<<set $objectName = $"+$focus+"Name>>">>
+		<<print "<<set $objectAct = '"+$focus+"Act'>>">>
+		<<print "<<set $objectDisabled = $"+$focus+"Disabled>>">>
+		<<set $objectName = $objectName.charAt(0).toUpperCase()+$objectName.slice(1)>>
+		• 
+		<<if !$objectDisabled>> /% если объект не отключён — выводим его имя ссылкой %/
+			<<object $objectName $focus>>
+		<<else>>
+			''<<print $objectName>>''
+		<</if>>
+		: ''<<print $args[1]>>''
+		<br>
+		<<print $args[2]>> /% выводим описание действия %/
+	<</replace>>
+	<<replace "#actions">>
+		<<if !$objectDisabled and tale.has($objectAct)>> /% если объект не отключён и у него есть действия — выводим список действий %/
+			<<display $objectAct>>
+		<</if>>
+	<</replace>>
+	<<replace "#events">>
+		<<print $recipeEvent>>
+	<</replace>>
+	<<if $recipeEvent>>
+		<<prepend "#events">>
+			<br><br>
+		<</prepend>>
+		<<print "<<set $"+$recipe+"Event = ''>>">>
+	<</if>>
+	<<replace "#drunkness">>
+		<<display "HowDrunkAreYou">>
+	<</replace>>
+<</widget>>
+
+
+/% виджет удаления объекта %/
+<<widget "removeobj">>
+	<<print "<<set $objectParent = $"+$args[0]+"Parent>>">> /% запоминаем «родителя» объекта %/
+	<<if $objectParent>> /% если «родитель» есть, то удаляем объект из его «детей» %/
+		<<print "<<set $objectParentChildren = $"+$objectParent+"Children>>">>
+		<<set $objectParentChildren.splice($objectParentChildren.indexOf($args[0]), 1)>>
+	<</if>>
+	<<print "<<set $"+$args[0]+"Disabled = 1>>">>
+	<<if $historyArr.contains ($args[0])>> /% удаляем объект из истории %/
+		<<set $historyArr.splice($historyArr.indexOf($args[0]), 1)>>
+	<</if>>
+<</widget>>
+
+
+/% виджет перемещения объекта %/
+<<widget "moveobj">>
+	<<print "<<set $objectParent = $"+$args[0]+"Parent>>">>
+	<<if $objectParent>>
+		<<print "<<set $objectParentChildren = $"+$objectParent+"Children>>">>
+		<<set $objectParentChildren.splice($objectParentChildren.indexOf($args[0]), 1)>>
+	<</if>>
+	<<print "<<set $"+$args[0]+"Parent = $args[1]>>">>
+	<<print "<<set $objectParentChildren = $"+$args[1]+"Children>>">>
+	<<set $objectParentChildren.push($args[0])>>
+<</widget>>
+
+
+/% «Взять» %/
+<<widget "Take">>
+	<<print "<<set $objectNameG = $"+$args[0]+"NameG>>">>
+	<<print "<<set $objectActResult = '"+$args[0]+"Take'>>">>
+	<<set $linktext = "Взять "+$objectNameG>>
+	<<if !$righthandChildren[0]>>
+		<<if tale.has($objectActResult)>>
+			<<set $objectActResult = tale.get($objectActResult).processText()>>
+		<<else>>
+			<<set $objectActResult = "Ты берёшь "+$objectNameG+" в правую руку.">>
+		<</if>>
+		<<print "<<click '"+$linktext+"'>><<moveobj '"+$args[0]+"' 'righthand'>><<actrefresh '"+$args[0]+"' '"+$linktext+"' '"+$objectActResult+"'>><</click>>">>
+	<<elseif !$lefthandChildren[0]>>
+		<<if tale.has($objectActResult)>>
+			<<set $objectActResult = tale.get($objectActResult).processText()>>
+		<<else>>
+			<<set $objectActResult = "Ты берёшь "+$objectNameG+" в левую руку.">>
+		<</if>>
+		<<print "<<click '"+$linktext+"'>><<moveobj '"+$args[0]+"' 'lefthand'>><<actrefresh '"+$args[0]+"' '"+$linktext+"' '"+$objectActResult+"'>><</click>>">>
+	<<else>>
+		<<NoActVerb $args[0] $linktext "handsTakeFull">>
+	<</if>>
+<</widget>>
+
+
+/% «Выпить» %/
+<<widget "Drink">>
+	<<print "<<set $objectNameG = $"+$args[0]+"NameG>>">>
+	<<print "<<set $objectActResult = '"+$args[0]+"Drink'>>">>
+	<<set $linktext = "Выпить "+$objectNameG>>
+	<<if tale.has($objectActResult)>>
+		<<set $objectActResult = tale.get($objectActResult).processText()>>
+	<<else>>
+		<<set $objectActResult = "Ты выпиваешь "+$objectNameG+".">>
+	<</if>>
+	<<print "<<click '"+$linktext+"'>><<removeobj '"+$args[0]+"'>><<actrefresh '"+$args[0]+"' '"+$linktext+"' '"+$objectActResult+"'>><</click>>">>
+<</widget>>
+
+
+/% «Съесть» %/
+<<widget "Eat">>
+	<<print "<<set $objectNameG = $"+$args[0]+"NameG>>">> /% запоминаем имя объекта в родительском падеже %/
+	<<print "<<set $objectActResult = '"+$args[0]+"Eat'>>">>
+	<<set $linktext = "Съесть "+$objectNameG>> /% текст ссылки %/
+	<<if tale.has($objectActResult)>>
+		<<set $objectActResult = tale.get($objectActResult).processText()>>
+	<<else>>
+		<<set $objectActResult = "Ты съедаешь "+$objectNameG+".">>
+	<</if>>
+	<<print "<<click '"+$linktext+"'>><<removeobj '"+$args[0]+"'>><<actrefresh '"+$args[0]+"' '"+$linktext+"' '"+$objectActResult+"'>><</click>>">> /% удаляем объект и обновляем экран по действию %/
+<</widget>>
+
+
+/% «Лизать» %/
+<<widget "Lick">>
+	<<print "<<set $objectNameG = $"+$args[0]+"NameG>>">>
+	<<print "<<set $objectActResult = '"+$args[0]+"Lick'>>">>
+	<<if $args[1]>>
+		<<set $linktext = $args[1]>>
+	<<else>>
+		<<set $linktext = "Облизать "+$objectNameG>>
+	<</if>>
+	<<if tale.has($objectActResult)>>
+		<<set $objectActResult = tale.get($objectActResult).processText()>>
+	<<else>>
+		<<set $objectActResult = "Ты лижешь "+$objectNameG+".">>
+	<</if>>
+	<<print "<<set $"+$args[0]+"Salted = 0>>">>
+	<<print "<<click '"+$linktext+"'>><<actrefresh '"+$args[0]+"' '"+$linktext+"' '"+$objectActResult+"'>><</click>>">>
+<</widget>>
+
+
+/% «Положить» %/
+<<widget "PutOn">>
+	<<print "<<set $objectNameG = $"+$args[0]+"NameG>>">>
+	<<print "<<set $subjectNameG = $"+$args[1]+"NameG>>">>
+	<<print "<<set $objectActResult = '"+$args[0]+"PutOn'>>">>
+	<<if $args.length == 2>>
+		<<set $linktext = $args[1].charAt(0).toUpperCase()+$args[1].slice(1)+" "+$objectNameG>>
+		<<set $subject = "counter">>
+	<<elseif $args.length == 4>>
+		<<set $linktext = $args[2].charAt(0).toUpperCase()+$args[2].slice(1)+" "+$objectNameG+" "+$args[3]+" "+$subjectNameG>>
+		<<set $subject = $args[1]>>
+	<<endif>>
+	<<if tale.has($objectActResult)>>
+		<<set $objectActResult = tale.get($objectActResult).processText()>>
+	<<else>>
+		<<set $objectActResult = "Ты убираешь "+$objectNameG+".">>
+	<</if>>
+	<<print "<<click '"+$linktext+"'>><<moveobj '"+$args[0]+"' '"+$subject+"'>><<actrefresh '"+$args[0]+"' '"+$linktext+"' '"+$objectActResult+"'>><</click>>">>
+<</widget>>
+
+
+/% «Переложить из руки в руку» %/
+<<widget "ChangeHands">>
+	<<print "<<set $objectNameG = $"+$args[0]+"NameG>>">>
+	<<print "<<set $objectActResult = '"+$args[0]+"ChangeHands'>>">>
+	<<print "<<set $objectParent = $"+$args[0]+"Parent>>">>
+	<<set $linktext = "Переложить "+$objectNameG+" в другую руку">>
+	<<if $objectParent == "lefthand">>
+		<<set $otherhand = "righthand">>
+	<<elseif $objectParent == "righthand">>
+		<<set $otherhand = "lefthand">>
+	<</if>>
+	<<print "<<set $subject = $"+$otherhand+"Children[0]>>">>
+	<<print "<<set $subjectNameG = $"+$subject+"NameG>>">>
+	<<print "<<set $otherhandNameG = $"+$otherhand+"NameG>>">>
+	<<print "<<set $objectParentNameG = $"+$objectParent+"NameG>>">>
+	<<if $subject>>
+		<<set $objectActResult = "Ты берёшь "+$objectNameG+" в "+$otherhandNameG+", а "+$subjectNameG+" в "+$objectParentNameG+".">>
+		<<set $whereto = "<<moveobj '"+$args[0]+"' '"+$otherhand+"'>><<moveobj '"+$subject+"' '"+$objectParent+"'>>">>
+	<<else>>
+		<<set $objectActResult = "Ты перекладываешь "+$objectNameG+" в "+$otherhandNameG+".">>
+		<<set $whereto = "<<moveobj '"+$args[0]+"' '"+$otherhand+"'>>">>
+	<</if>>
+	<<print "<<click '"+$linktext+"'>>"+$whereto+"<<actrefresh '"+$args[0]+"' '"+$linktext+"' '"+$objectActResult+"'>><</click>>">>
+<</widget>>
+
+
+/% «Посолить» %/
+<<widget "SaltSmthng">>
+	<<click "Посолить что-нибудь">>
+		<<set $MODE = "salting">>
+		<<fluencerefresh>>
+	<</click>>
+<</widget>>
+
+
+/% «Смочить лаймом» %/
+<<widget "LimeSmthng">>
+	<<click "Смочить что-нибудь соком лайма">>
+		<<set $MODE = "liming">>
+		<<fluencerefresh>>
+	<</click>>
+<</widget>>
+
+
+/% Глагол с удалением объекта %/
+<<widget "RemoveVerb">>
+	<<set $objectActResult = tale.get($args[2]).processText()>>
+	<<print "<<click '"+$args[1]+"'>><<removeobj '"+$args[0]+"'>><<actrefresh '"+$args[0]+"' '"+$args[1]+"' '"+$objectActResult+"'>><</click>>">>
+<</widget>>
+
+
+/% Глагол без последствий — выводит только описание %/
+<<widget "NoActVerb">>
+	<<set $objectActResult = tale.get($args[2]).processText()>>
+	<<print "<<click '"+$args[1]+"'>><<actrefresh '"+$args[0]+"' '"+$args[1]+"' '"+$objectActResult+"'>><</click>>">>
+<</widget>>
+
+
+/% Режим соления %/
+<<widget "saltingmode">>
+	<<print "<<set $objectNameG = $"+$args[0]+"NameG>>">>
+	<<print "<<set $objectActResult = '"+$args[0]+"Salt'>>">>
+	<<print "<<set $"+$args[0]+"Salted = 1>>">>
+	<<set $linktext = "Посолить "+$objectNameG>>
+	<<if tale.has($objectActResult)>>
+		<<set $objectActResult = tale.get($objectActResult).processText()>>
+	<<else>>
+		<<set $objectActResult = "Ты солишь "+$objectNameG+".">>
+	<</if>>
+	<<actrefresh $args[0] $linktext $objectActResult>>
+<</widget>>
+
+
+/% Режим смачивания лаймом %/
+<<widget "limingmode">>
+	<<print "<<set $objectNameG = $"+$args[0]+"NameG>>">>
+	<<print "<<set $objectActResult = '"+$args[0]+"Lime'>>">>
+	<<print "<<set $"+$args[0]+"Limed = 1>>">>
+	<<set $linktext = "Смочить "+$objectNameG+" соком лайма">>
+	<<if tale.has($objectActResult)>>
+		<<set $objectActResult = tale.get($objectActResult).processText()>>
+	<<else>>
+		<<set $objectActResult = "Ты смачиваешь "+$objectNameG+".">>
+	<</if>>
+	<<actrefresh $args[0] $linktext $objectActResult>>
+<</widget>>
