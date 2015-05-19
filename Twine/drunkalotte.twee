@@ -10,11 +10,14 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	[[Вячеслав Добранов|http://cheshire.ifiction.ru/]]
 
 :: StoryInit
+<<display "BarInit">>
 <<display "BasicRecipeInit">>
 <<display "DeepBombInit">>
 <<display "PalomaChaserInit">>
 <<set $historyArr = []>>
 <<set $drunkness = 60>>
+<<set $hour = 23>>
+<<set $minute = 55>>
 /%<<set $AllGodsNames = ["Бесстрашный экспериментатор", "Гениальный комик", "Ловкий акробат", "Танцор от бога", "Непобедимый герой", "Одарённый певец", "Душа вечеринки", "Король мира", "Император вселенной", "Мертвец"]>>%/
 <<set $AllGodsNames = ["Бесстрашный экспериментатор", "Непобедимый герой", "Одарённый певец", "Душа вечеринки", "Король мира", "Император вселенной", "Мертвец"]>>
 
@@ -101,6 +104,43 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	<br>
 	[[А что там по другим коктейлям?|Table]]
 
+
+
+:: BarInit [nobr]
+	<<display "musicInit">>
+	<<display "lampsInit">>
+	<<display "bottlesInit">>
+	<<display "barmanInit">>
+	<<display "clockInit">>
+:: BarDescription [nobr]
+	Ты сидишь за стойкой маленького бара в паре кварталов от своего дома. Уютное местечко: негромкая <<prop "музыка" "music">>, приглушённый <<prop "свет" "lamps">>. Ярко освещены лишь стойка и <<prop "полки" "bottles">> за спиной <<prop "бармена" "barman">>. Прямо напротив висят местные <<prop "часы" "clock">>.<br><br>
+
+:: musicInit [nobr]
+	<<set $musicName = "музыка">>
+:: musicDesc [nobr]
+	Из динамиков доносится ненавязчивый блюз, не мешающий вечному гулу разговоров.
+
+:: lampsInit [nobr]
+	<<set $lampsName = "свет">>
+:: lampsDesc [nobr]
+	Над барной стойкой висят несколько ламп. В конусах их света клубятся облака сигаретного дыма.
+
+:: bottlesInit [nobr]
+	<<set $bottlesName = "полки">>
+:: bottlesDesc [nobr]
+	Подсвеченные полки заставлены бутылками с выпивкой на любой вкус: американский, шотландский, ирландский виски, обойма бутылок мартини, цветная радуга ликёров, дорогие и не очень коньяки, водка и несколько квадратных бутылок текилы. Один лишь вид этого сверкающего великолепия грозит хроническим алкоголизмом.
+
+:: barmanInit [nobr]
+	<<set $barmanName = "бармен">>
+:: barmanDesc [nobr]
+	Улыбчивый малый, двигающийся с ловкостью и скоростью ниндзя.
+
+:: clockInit [nobr]
+	<<set $clockName = "часы">>
+:: clockDesc [nobr]
+	Над барменом висят большие часы с тремя циферблатами, показывающими время для разных городов. Так, в Лондоне сейчас <<clockwork -5>>, в Мюнхене <<clockwork -4>>. А вот местное уже <<clockwork>>.
+
+
 :: Hint [nobr]
 	<br><br>
 	<<if $recipe == "BasicRecipe">>
@@ -114,6 +154,9 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 :: HowDrunkAreYou [nobr]
 	<<set $i = $drunkness/10-6>>
 	Опьянение: <<print $drunkness>>% [<<print $AllGodsNames[$i]>>]
+
+
+
 
 
 /%
@@ -139,6 +182,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 <<set $recipeName = "Текила с лаймом и солью">>
 :: BasicRecipe [nobr]
 	<div id="commandline"><p id="hint"><<click "Текила с лаймом и солью">><<replace "#events">><<display "Hint">><</replace>><</click>></p><p id="drunkness"><<display "HowDrunkAreYou">></p></div>
+	<span id="decor" class="decor notab"><<display "BarDescription">></span>
 	<span id="inventory" class="notab"><<display "counterInv">> <<display "handsInv">></span>
 	<span id="history" class="notab"></span>
 	<span id="focus" class="notab"></span>
@@ -462,6 +506,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 :: tequilaDrink [nobr]
 	Ты прикладываешь стопку к губам, запрокидываешь голову и, щурясь на яркие лампы, проглатываешь маслянистую жидкость.
 	<<set $drunkness += 10>>
+	<<set $minute += 20>>
 :: tequilaSalt [nobr]
 	<<if $shotParent == "counter">>
 		Ты сыпешь в <<object "текилу" "tequila">> соль и, оперевшись подбородком на <<object "стойку" "counter">>, заворожённо наблюдаешь, как крохотные кристаллики медленно опускаются на дно <<object "стопки" "shot">>.
@@ -520,6 +565,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 :: MahWidgets [widget nobr]
 <<widget "object">><<click $args[0]>>
 		<<if $MODE>>
+			<<removeclass ".decor" "turnoff">>
 			<<removeclass "#inventory" "fluence">>
 			<<removeclass "#history" "fluence">>
 			<<removeclass "#focus" "fluence">>
@@ -596,6 +642,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 /% виджет обновления экрана при действии объекта на объект %/
 <<widget "fluencerefresh">>
 	<<if $MODE>>
+		<<addclass ".decor" "turnoff">>
 		<<addclass "#inventory" "fluence">>
 		<<addclass "#history" "fluence">>
 		<<addclass "#focus" "fluence">>
@@ -669,6 +716,40 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 		<<display "HowDrunkAreYou">>
 	<</replace>>
 <</widget>>
+
+
+/% виджет осмотра декораций %/
+<<widget "prop">><<click $args[0]>>
+		<<print "<<set $recipeDaemon = '"+$recipe+"Daemon'>>">>
+		<<display $recipeDaemon>>
+		<<print "<<set $recipeEvent = $"+$recipe+"Event>>">>
+		<<print "<<set $objectDisabled = $"+$focus+"Disabled>>">>
+		<<if $focus && !$objectDisabled>> /% если уже есть объект в старом фокусе и этот объект не равен объекту в фокусе новом и не отключён, перемещаем его в историю %/
+			<<set $historyArr.push($focus)>>
+		<<endif>>
+		<<set $focus = "">>
+		<<history>>
+		<<replace "#focus">>
+			<br><br>
+			<<print "<<set $propName = $"+$args[1]+"Name>>">>
+			<<print "<<set $propDesc = '"+$args[1]+"Desc'>>">>
+			<<set $propName = $propName.charAt(0).toUpperCase()+$propName.slice(1)>>
+			• ''<<print $propName>>''
+			<br>
+			<<display $propDesc>>
+		<</replace>>
+		<<replace "#actions">>
+		<</replace>>
+		<<replace "#events">>
+			<<print $recipeEvent>>
+		<</replace>>
+		<<if $recipeEvent>>
+			<<prepend "#events">>
+				<br><br>
+			<</prepend>>
+			<<print "<<set $"+$recipe+"Event = ''>>">>
+		<</if>>
+	<</click>><</widget>>
 
 
 /% виджет удаления объекта %/
@@ -877,3 +958,6 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	<</if>>
 	<<actrefresh $args[0] $linktext $objectActResult>>
 <</widget>>
+
+
+<<widget "clockwork">><<if $minute >= 60>><<set $minute -= 60>><<set $hour++>><</if>><<if $hour >= 24>><<set $hour -= 24>><<elseif $hour < 0>><<set $hour += 24>><</if>><<if $args[0]>><<set $xhour = $hour + $args[0]>><<else>><<set $xhour = $hour>><</if>><<if $xhour >= 24>><<set $xhour -= 24>><<elseif $xhour < 0>><<set $xhour += 24>><</if>><<print "<<print ($xhour < 10 ? '0' : '')>>"+$xhour+":<<print ($minute < 10 ? '0' : '')>>"+$minute>><</widget>>
