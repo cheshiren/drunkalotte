@@ -25,7 +25,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 
 :: MenuStory
 	<hr>
-	<span id="beta"></span>
+	<span class="beta"></span>
 	<hr>
 
 :: Recipes
@@ -51,7 +51,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 Выпей текилу и запей чейзером
 
 :: Start [nobr]
-<div id="disclaimer"><table><tr><th><div id="plus18">18+</div></th></tr><tr><th style="vertical-align:top"><div id="warning">Употребление алкоголя вредит вашему здоровью<br><br>[[Я осознаю это|BasicRecipe][$recipe = "BasicRecipe"]]</div></th></tr></table></div>
+<div class="disclaimer"><table><tr><th><div class="plus18">18+</div></th></tr><tr><th style="vertical-align:top"><div class="warning">Употребление алкоголя вредит вашему здоровью<br><br>/%[[Мне больше 18-ти|BasicRecipe][$recipe = "BasicRecipe"]]%/[[Мне больше 18-ти|Start2]]</div></th></tr></table></div>
 
 :: Start2
 	Часы над головой бармена показывают, что прошло уже три часа с тех пор, как ты зашёл в этот бар. Конечно, изначально ты планировал лишь спокойно выпить чашечку кофе после тяжёлого трудового дня, может быть, выкурить пару сигарет, а потом вернуться домой к ужину. Однако, как это часто бывает в этих делах, все планы были разрушены встречей со старым приятелем. В результате, после шести кружек пива, двух гневных звонков из дома и трёх походов в туалет, кто-то из вас высказал предложение поэкспериментировать.
@@ -60,12 +60,12 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	Вы с приятелем переглядываетесь: «А в чём подвох?»
 	Улыбка бармена становится ещё шире: «Коктейли вы готовите себе сами. Засчитываются только правильно приготовленные напитки, но вы обязаны выпить всё, что смешаете».
 	Снова переглянувшись и пожав плечами, вы просите показать список.
-
-	[[Поехали!|Start3]]
+	
+	<center>[[Поехали!|Start3]]</center>
 	/%<<display "MainScreen">>%/
 
 /%:: Start3
-	<<print "<span id="+$loc+">???</span>">>
+	<<print "<span class="+$loc+">???</span>">>
 	<br>	«Пожалуйста, — говорит бармен и выкладывает перед вами броско оформленный картонный лист. — Всего вы должны приготовить и выпить шесть коктейлей. В нескольких случаях у вас есть выбор, например, можете остановиться на „Эль Бандито“ вместо „Глубинной бобмы“ — он легче в приготовлении. Выбирайте коктейль и я расскажу, как его смешивать».
 <center>
 |!<center>№</center>|!<center>Название</center>|!<center>Сложность</center>|!<center>Крепость</center>|
@@ -93,16 +93,16 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 
 :: StartWithExplanations [nobr]
 	<<if $recipe == "BasicRecipe">>
-		«Это самый известный способ пить текилу — вы, наверняка, его знаете. У вас будет долька лайма, соль и стопка текилы. Нужно лаймом намочить руку, вот здесь, — он показывает на место между большим и указательным пальцами своей руки. — И затем посыпать её солью. И всё. Дальше только три быстрых действия: слизываете соль, выпиваете текилу и закусываете лаймом. Правда, легко? Начнёте с этого рецепта?»
+		«Это самый известный способ пить текилу — вы, наверняка, его знаете. У вас будет долька лайма, соль и стопка текилы. Нужно лаймом намочить руку, вот здесь, — он показывает на место между большим и указательным пальцами своей руки. — И затем посыпать её солью. И всё. Дальше только три быстрых действия: слизываете соль, выпиваете текилу и закусываете лаймом. Правда, легко? Выбираете этот рецепт?»
 	<<elseif $recipe == "DeepBomb">>
-		«Глубинная бомба — очень простой в приготовлении коктейль. В высокий стакан наливаете на две трети светлого лагера и аккуратно опускаете в него стопку с текилой. Когда стопка опускается на дно стакана, начинаете пить пиво и, в конце концов, текилу. Только медленно, чтобы стопкой не ударило по зубам. Вот и весь рецепт. Начнёте с этого коктейля?»
+		«Глубинная бомба — очень простой в приготовлении коктейль. В высокий стакан наливаете на две трети светлого лагера и аккуратно опускаете в него стопку с текилой. Когда стопка опускается на дно стакана, начинаете пить пиво и, в конце концов, текилу. Только медленно, чтобы стопкой не ударило по зубам. Вот и весь рецепт. Выбираете этот коктейль?»
 	<<elseif $recipe = "PalomaChaser">>
-		«В Паломе много составляющих, поэтому он считается относительно сложным. В стопку наливаете медовый сироп, 10 мл., затем добавляете грейпфрутовый сок, 30 мл. Туда же выжимаете половинку лайма и сыпите щепотку соли. Перемешиваете коктейльной ложкой. Всё, чейзер готов. Выпиваете стопку текилы и запиваете стопкой чейзера. Будете начинать с него?»
+		«В Паломе много составляющих, поэтому он считается относительно сложным. В стопку наливаете медовый сироп, 10 мл., затем добавляете грейпфрутовый сок, 30 мл. Туда же выжимаете половинку лайма и сыпите щепотку соли. Перемешиваете коктейльной ложкой. Всё, чейзер готов. Выпиваете стопку текилы и запиваете стопкой чейзера. Выбираете его?»
 	<</if>>
-	<br><br>
+	<center><br>
 	[[Поехали-поехали!|$recipe]]
 	<br>
-	[[А что там по другим коктейлям?|Table]]
+	[[А что там по другим коктейлям?|Table]]</center>
 
 
 
@@ -142,7 +142,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 
 
 :: Hint [nobr]
-	<br><br>
+	<br>
 	<<if $recipe == "BasicRecipe">>
 		...лаймом намочить руку, посыпать её солью, слизать соль, выпить текилу, закусить лаймом...
 	<<elseif $recipe == "DeepBomb">>
@@ -180,30 +180,74 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 <<display "lefthandInit">>
 <<display "righthandInit">>
 <<set $recipeName = "Текила с лаймом и солью">>
+<<set $recipeLog = []>>
 :: BasicRecipe [nobr]
-	<div id="commandline"><p id="hint"><<click "Текила с лаймом и солью">><<replace "#events">><<display "Hint">><</replace>><</click>></p><p id="drunkness"><<display "HowDrunkAreYou">></p></div>
-	<span id="decor" class="decor notab"><<display "BarDescription">></span>
-	<span id="inventory" class="notab"><<display "counterInv">> <<display "handsInv">></span>
-	<span id="history" class="notab"></span>
-	<span id="focus" class="notab"></span>
-	<span id="actions" class="notab"></span>
-	<span id="events" class="notab"></span>
+	<div class="commandline"><p class="hint"><<click "Текила с лаймом и солью">><<replace ".events">><<display "Hint">><</replace>><</click>></p><p class="drunkness"><<display "HowDrunkAreYou">></p></div>
+	<span class="decor"><<display "BarDescription">></span>
+	<span class="inventory"><<display "counterInv">> <<display "handsInv">></span>
+	<span class="history"></span>
+	<span class="focus"></span>
+	<span class="actions"></span>
+	<span class="events"></span>
+	<span class="outcome"></span>
 :: BasicRecipeDaemon [nobr]
-	<<if !$plateChildren.contains("lime") and !$lefthandChildren.contains("lime") and !$righthandChildren.contains("lime")>>
-		<<display "limeInit">>
-		<<set $plateChildren.push("lime")>>
-		<<set $BasicRecipeEvent = "Бармен выкладывает на тарелку ещё пару ломтиков лайма, один из которых тут же подцепляет твой товарищ.">>
+	<<replace ".beta">><<print $righthandSalted>><</replace>>
+	<<if $recipeLog[0] == "lick" && $recipeLog[1] == "drink" && $recipeLog[2] == "eat">>
+		<<addclass ".decor" "turnoff">>
+		<<addclass ".inventory" "turnoff">>
+		<<addclass ".history" "turnoff">>
+		<<addclass ".focus" "turnoff">>
+		<<addclass ".actions" "hidden">>
+		<<addclass ".hint" "turnoff">>
+		<<set $args[2] = "Ты прикладываешь стопку к губам, запрокидываешь голову, проглатываешь маслянистую жидкость и с победной улыбкой водружаешь пустую стопку на стойку.">>
+		<<replace ".outcome">>
+			<br>[[Сделано!|BasicRecipeOutcome]]
+		<</replace>>
+	<<elseif $drunkness == 120>>
+		<<addclass ".decor" "turnoff">>
+		<<addclass ".inventory" "turnoff">>
+		<<addclass ".history" "turnoff">>
+		<<addclass ".focus" "turnoff">>
+		<<addclass ".actions" "hidden">>
+		<<addclass ".hint" "turnoff">>
+		<<set $args[2] = "Ты прикладываешь стопку к губам, запрокидываешь голову и...">>
+		<<replace ".outcome">>
+			<br>[[...|BasicRecipeOutcome]]
+		<</replace>>
+	<<else>>
+		<<if !$plateChildren.contains("lime") and !$lefthandChildren.contains("lime") and !$righthandChildren.contains("lime")>>
+			<<display "limeInit">>
+			<<set $plateChildren.push("lime")>>
+			<<set $BasicRecipeEvent = "Бармен выкладывает на тарелку ещё пару ломтиков лайма, один из которых тут же подцепляет твой товарищ.">>
+		<</if>>
+		<<if !$shotChildren.contains("tequila") and $counterChildren.contains("shot")>>
+			<<display "tequilaInit">>
+			<<set $shotChildren.push("tequila")>>
+			<<set $BasicRecipeEvent = "Бармен ловким движением наполняет твою стопку.">>
+		<</if>>
+		<<if !$counterChildren.contains("salter") and !$lefthandChildren.contains("salter") and !$righthandChildren.contains("salter")>>
+			<<display "salterInit">>
+			<<set $counterChildren.push("salter")>>
+			<<set $BasicRecipeEvent = "Бармен ставит перед тобой новую солонку.">>
+		<</if>>
+		<<if $recipeLog[0] && $recipeLog[0] != "lick">>
+			<<if $BasicRecipeEvent>>
+				<<set $BasicRecipeEvent = "Ты задумываешься, а всё ли по инструкции ты делаешь.<br><br>"+$BasicRecipeEvent>>
+			<<else>>
+				<<set $BasicRecipeEvent = "Ты задумываешься, а всё ли по инструкции ты делаешь.">>
+			<</if>>
+			<<set $recipeLog = []>>
+		<<elseif $recipeLog[2] && $recipeLog[1] != "drink">>
+			<<if $BasicRecipeEvent>>
+				<<set $BasicRecipeEvent = "Кажется, ты выполнил все нужные действия, правда, не в той последовательности.<br><br>"+$BasicRecipeEvent>>
+			<<else>>
+				<<set $BasicRecipeEvent = "Кажется, ты выполнил все нужные действия, правда, не в той последовательности.">>
+			<</if>>
+			<<set $recipeLog = []>>
+		<</if>>
 	<</if>>
-	<<if !$shotChildren.contains("tequila") and $counterChildren.contains("shot")>>
-		<<display "tequilaInit">>
-		<<set $shotChildren.push("tequila")>>
-		<<set $BasicRecipeEvent = "Бармен ловким движением наполняет твою стопку.">>
-	<</if>>
-	<<if !$counterChildren.contains("salter") and !$lefthandChildren.contains("salter") and !$righthandChildren.contains("salter")>>
-		<<display "salterInit">>
-		<<set $counterChildren.push("salter")>>
-		<<set $BasicRecipeEvent = "Бармен ставит перед тобой новую солонку.">>
-	<</if>>
+:: BasicRecipeOutcome [nobr]
+	<<display "Table">>
 
 
 :: handsInit [nobr]
@@ -249,7 +293,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 :: lefthandInv [nobr]
 :: lefthandAct [nobr]
 	<<if $lefthandLimed && $lefthandSalted>>
-		<br><br>
+		<br>
 		<<Lick "lefthand" "Слизнуть соль">>
 	<</if>>
 :: lefthandSalt [nobr]
@@ -272,7 +316,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 		<<set $lefthandLimed = 0>>
 	<</if>>
 :: lefthandLick [nobr]
-	Ты слизываешь всю соль с левой руки.
+	Ты слизываешь всю соль и весь лаймовый сок с левой руки.
 
 
 :: righthandInit [nobr]
@@ -297,8 +341,8 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 :: righthandInv [nobr]
 :: righthandAct [nobr]
 	<<if $righthandLimed && $righthandSalted>>
-		<br><br>
-		<<Lick "lefthand" "Слизнуть соль">>
+		<br>
+		<<Lick "righthand" "Слизнуть соль">>
 	<</if>>
 :: righthandSalt [nobr]
 	<<if $salterParent != "righthand">>
@@ -320,7 +364,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 		<<set $righthandLimed = 0>>
 	<</if>>
 :: righthandLick [nobr]
-	Ты слизываешь всю соль с правой руки.
+	Ты слизываешь всю соль и весь лаймовый сок с правой руки.
 
 
 :: counterInit [nobr]
@@ -384,7 +428,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 :: limeInv [nobr]
 	кусочек <<object "лайма" "lime">>
 :: limeAct [nobr]
-	<br><br>
+	<br>
 	<<if $limeParent != "lefthand" and $limeParent != "righthand">>
 		<<Take "lime">><br>
 		<<NoActVerb "lime" "Съесть кусочек лайма" "limeEatFail">>
@@ -415,7 +459,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 :: salterInv [nobr]
 	<<object "солонка" "salter">>
 :: salterAct [nobr]
-	<br><br>
+	<br>
 	<<if $salterParent != "lefthand" and $salterParent != "righthand">>
 		<<Take "salter">>
 		<<if $salterLimed>>
@@ -432,6 +476,8 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 		<<PutOn "salter" "поставить">><br>
 		<<ChangeHands "salter">>
 	<</if>>
+:: salterPutOn [nobr]
+	Ты ставишь солонку на <<object "стойку" "counter">>.
 :: salterSalt [nobr]
 	Ты крепко задумываешься на несколько секунд.
 :: salterLime [nobr]
@@ -455,7 +501,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	<<else>>
 		. Пустой.
 	<<endif>>
-	<<print ($shotSalted ? " На дне видны несколько медленно растворяющихся кристалликов соли." : "")>>
+	<<print ($tequilaSalted ? " На дне видны несколько медленно растворяющихся кристалликов соли." : "")>>
 :: shotInv [nobr]
 	<<if $shotChildren[0] == "tequila">>
 		пятидесятиграммовая <<object "стопка" "shot">> с <<object "текилой" "tequila">>
@@ -463,7 +509,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 		пустая пятидесятиграммовая <<object "стопка" "shot">>
 	<</if>>
 :: shotAct [nobr]
-	<br><br>
+	<br>
 	<<if $shotParent != "lefthand" and $shotParent != "righthand">>
 		<<Take "shot">>
 	<<else>>
@@ -473,6 +519,8 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 		<<PutOn "shot" "поставить">><br>
 		<<ChangeHands "shot">>
 	<</if>>
+:: shotPutOn [nobr]
+		Ты со стуком ставишь стопку на <<object "стойку" "counter">>.
 :: shotSalt [nobr]
 	<<if $shotChildren[0]>>
 		<<display "tequilaSalt">>
@@ -495,7 +543,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 :: tequilaInv [nobr]
 	<<object "текила" "tequila">>
 :: tequilaAct [nobr]
-	<br><br>
+	<br>
 	<<if $shotParent != "lefthand" and $shotParent != "righthand">>
 		<<NoActVerb "tequila" "Выпить текилу" "tequilaDrinkFail">>
 	<<else>>
@@ -505,8 +553,6 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	Ты вытягиваешь губы в трубочку и пытаешься высосать текилу из стоящей на стойке <<object "стопки" "shot">>. Хм. Без рук не получается.
 :: tequilaDrink [nobr]
 	Ты прикладываешь стопку к губам, запрокидываешь голову и, щурясь на яркие лампы, проглатываешь маслянистую жидкость.
-	<<set $drunkness += 10>>
-	<<set $minute += 20>>
 :: tequilaSalt [nobr]
 	<<if $shotParent == "counter">>
 		Ты сыпешь в <<object "текилу" "tequila">> соль и, оперевшись подбородком на <<object "стойку" "counter">>, заворожённо наблюдаешь, как крохотные кристаллики медленно опускаются на дно <<object "стопки" "shot">>.
@@ -529,6 +575,9 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 %/
 
 :: DeepBombInit [nobr]
+:: DeepBomb [nobr]
+:: DeepBombDaemon [nobr]
+:: DeepBombOutcome [nobr]
 
 
 /%
@@ -542,6 +591,9 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 %/
 
 :: PalomaChaserInit [nobr]
+:: PalomaChaser [nobr]
+:: PalomaChaserDaemon [nobr]
+:: PalomaChaserOutcome [nobr]
 
 
 
@@ -566,11 +618,11 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 <<widget "object">><<click $args[0]>>
 		<<if $MODE>>
 			<<removeclass ".decor" "turnoff">>
-			<<removeclass "#inventory" "fluence">>
-			<<removeclass "#history" "fluence">>
-			<<removeclass "#focus" "fluence">>
-			<<removeclass "#actions" "turnoff">>
-			/%<<removeclass "#hint" "turnoff">>%/
+			<<removeclass ".inventory" "fluence">>
+			<<removeclass ".history" "fluence">>
+			<<removeclass ".focus" "fluence">>
+			<<removeclass ".actions" "turnoff">>
+			/%<<removeclass ".hint" "turnoff">>%/
 			<<if $MODE == "salting">>
 				<<saltingmode $args[1]>>
 			<<elseif $MODE == "liming">>
@@ -590,7 +642,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 			<<endif>>
 			<<set $focus = $args[1]>> /% обновляем фокус %/
 			<<history>> /% обновляем историю %/
-			<<replace "#focus">> /% выводим данные объекта в фокусе %/
+			<<replace ".focus">> /% выводим данные объекта в фокусе %/
 				<br><br>
 				<<print "<<set $objectName = $"+$args[1]+"Name>>">>
 				<<print "<<set $objectDesc = '"+$args[1]+"Desc'>>">>
@@ -600,17 +652,17 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 				<br>
 				<<display $objectDesc>> /% выводим описание %/
 			<</replace>>
-			<<replace "#actions">>
+			<<replace ".actions">>
 				<<if tale.has($objectAct)>>
 					<<display $objectAct>> /% выводим действия %/
 				<</if>>
 			<</replace>>
-			<<replace "#events">>
+			<<replace ".events">>
 				<<print $recipeEvent>>
 			<</replace>>
 			<<if $recipeEvent>>
-				<<prepend "#events">>
-					<br><br>
+				<<prepend ".events">>
+					<br>
 				<</prepend>>
 				<<print "<<set $"+$recipe+"Event = ''>>">>
 			<</if>>
@@ -620,15 +672,14 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 
 /% виджет вывода истории просмотренных объектов %/
 <<widget "history">>
-	<<replace "#beta">><<print $historyArr.toString()>><</replace>>
-	<<replace "#history">> /% для начала сбрасываем существующий текст %/
+	<<replace ".history">> /% для начала сбрасываем существующий текст %/
 	<</replace>>
 	<<if $historyArr.length != 0>> /% если история есть, выводим её %/
-		<<append "#history">><br><br><</append>>
+		<<append ".history">><br><br><</append>>
 		<<for $i = 0; $i < $historyArr.length; $i++>> /% перебираем содержимое массива истории %/
 			<<print "<<set $objectName = $"+$historyArr[$i]+"Name>>">>
 			<<set $objectName = $objectName.charAt(0).toUpperCase()+$objectName.slice(1)>> /% у очередногообъекта в истории делаем первую букву заглавной %/
-			<<append "#history">> /% добавляем объект в виде ссылки, если он не последний, ещё и переводим строку %/
+			<<append ".history">> /% добавляем объект в виде ссылки, если он не последний, ещё и переводим строку %/
 			• <<object $objectName $historyArr[$i]>>
 			<<if $i < $historyArr.length-1>>
 				<br>
@@ -643,20 +694,20 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 <<widget "fluencerefresh">>
 	<<if $MODE>>
 		<<addclass ".decor" "turnoff">>
-		<<addclass "#inventory" "fluence">>
-		<<addclass "#history" "fluence">>
-		<<addclass "#focus" "fluence">>
-		<<addclass "#actions" "turnoff">>
-		/%<<addclass "#hint" "turnoff">>%/
+		<<addclass ".inventory" "fluence">>
+		<<addclass ".history" "fluence">>
+		<<addclass ".focus" "fluence">>
+		<<addclass ".actions" "turnoff">>
+		/%<<addclass ".hint" "turnoff">>%/
 	<</if>>
 	<<print "<<set $recipeDaemon = '"+$recipe+"Daemon'>>">>
 	<<display $recipeDaemon>>
 	<<print "<<set $recipeEvent = $"+$recipe+"Event>>">>
-	<<replace "#inventory">>
+	<<replace ".inventory">>
 		<<display "counterInv">> <<display "handsInv">>
 	<</replace>>
 	<<history>>
-	<<replace "#focus">>
+	<<replace ".focus">>
 		<br><br>
 		<<print "<<set $objectName = $"+$focus+"Name>>">>
 		<<print "<<set $objectDesc = '"+$focus+"Desc'>>">>
@@ -665,7 +716,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 		<br>
 		<<display $objectDesc>>
 	<</replace>>
-	<<replace "#actions">>
+	<<replace ".actions">>
 		<<if tale.has($objectAct)>>
 			<<display $objectAct>> /% выводим действия %/
 		<</if>>
@@ -678,11 +729,11 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	<<print "<<set $recipeDaemon = '"+$recipe+"Daemon'>>">> /% запоминаем демона локации %/
 	<<display $recipeDaemon>> /% показываем демона локации %/
 	<<print "<<set $recipeEvent = $"+$recipe+"Event>>">>
-	<<replace "#inventory">> /% обновляем инвентарную часть описания %/
+	<<replace ".inventory">> /% обновляем инвентарную часть описания %/
 		<<display "counterInv">> <<display "handsInv">>
 	<</replace>>
 	<<history>> /% обновляем историю %/
-	<<replace "#focus">> /% выводим описание действия %/
+	<<replace ".focus">> /% выводим описание действия %/
 		<br><br>
 		<<print "<<set $objectName = $"+$focus+"Name>>">>
 		<<print "<<set $objectAct = '"+$focus+"Act'>>">>
@@ -698,23 +749,24 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 		<br>
 		<<print $args[2]>> /% выводим описание действия %/
 	<</replace>>
-	<<replace "#actions">>
+	<<replace ".actions">>
 		<<if !$objectDisabled and tale.has($objectAct)>> /% если объект не отключён и у него есть действия — выводим список действий %/
 			<<display $objectAct>>
 		<</if>>
 	<</replace>>
-	<<replace "#events">>
+	<<replace ".events">>
 		<<print $recipeEvent>>
 	<</replace>>
 	<<if $recipeEvent>>
-		<<prepend "#events">>
-			<br><br>
+		<<prepend ".events">>
+			<br>
 		<</prepend>>
 		<<print "<<set $"+$recipe+"Event = ''>>">>
 	<</if>>
-	<<replace "#drunkness">>
+	<<replace ".drunkness">>
 		<<display "HowDrunkAreYou">>
 	<</replace>>
+	<<set $quickcommand = 0>>
 <</widget>>
 
 
@@ -729,7 +781,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 		<<endif>>
 		<<set $focus = "">>
 		<<history>>
-		<<replace "#focus">>
+		<<replace ".focus">>
 			<br><br>
 			<<print "<<set $propName = $"+$args[1]+"Name>>">>
 			<<print "<<set $propDesc = '"+$args[1]+"Desc'>>">>
@@ -738,14 +790,14 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 			<br>
 			<<display $propDesc>>
 		<</replace>>
-		<<replace "#actions">>
+		<<replace ".actions">>
 		<</replace>>
-		<<replace "#events">>
+		<<replace ".events">>
 			<<print $recipeEvent>>
 		<</replace>>
 		<<if $recipeEvent>>
-			<<prepend "#events">>
-				<br><br>
+			<<prepend ".events">>
+				<br>
 			<</prepend>>
 			<<print "<<set $"+$recipe+"Event = ''>>">>
 		<</if>>
@@ -806,6 +858,9 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 
 /% «Выпить» %/
 <<widget "Drink">>
+	<<if $args[0] == "tequila">>
+		<<set $quickcommand = '<<set $drunkness += 10>><<set $minute += 20>><<set $recipeLog.push("drink")>>'>>
+	<</if>>
 	<<print "<<set $objectNameG = $"+$args[0]+"NameG>>">>
 	<<print "<<set $objectActResult = '"+$args[0]+"Drink'>>">>
 	<<set $linktext = "Выпить "+$objectNameG>>
@@ -814,12 +869,15 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	<<else>>
 		<<set $objectActResult = "Ты выпиваешь "+$objectNameG+".">>
 	<</if>>
-	<<print "<<click '"+$linktext+"'>><<removeobj '"+$args[0]+"'>><<actrefresh '"+$args[0]+"' '"+$linktext+"' '"+$objectActResult+"'>><</click>>">>
+	<<print "<<click '"+$linktext+"'>>"+$quickcommand+"<<removeobj '"+$args[0]+"'>><<actrefresh '"+$args[0]+"' '"+$linktext+"' '"+$objectActResult+"'>><</click>>">>
 <</widget>>
 
 
 /% «Съесть» %/
 <<widget "Eat">>
+	<<if $args[0] == "lime">>
+		<<set $quickcommand = '<<set $recipeLog.push("eat")>>'>>
+	<</if>>
 	<<print "<<set $objectNameG = $"+$args[0]+"NameG>>">> /% запоминаем имя объекта в родительском падеже %/
 	<<print "<<set $objectActResult = '"+$args[0]+"Eat'>>">>
 	<<set $linktext = "Съесть "+$objectNameG>> /% текст ссылки %/
@@ -828,12 +886,15 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	<<else>>
 		<<set $objectActResult = "Ты съедаешь "+$objectNameG+".">>
 	<</if>>
-	<<print "<<click '"+$linktext+"'>><<removeobj '"+$args[0]+"'>><<actrefresh '"+$args[0]+"' '"+$linktext+"' '"+$objectActResult+"'>><</click>>">> /% удаляем объект и обновляем экран по действию %/
+	<<print "<<click '"+$linktext+"'>>"+$quickcommand+"<<removeobj '"+$args[0]+"'>><<actrefresh '"+$args[0]+"' '"+$linktext+"' '"+$objectActResult+"'>><</click>>">> /% удаляем объект и обновляем экран по действию %/
 <</widget>>
 
 
 /% «Лизать» %/
 <<widget "Lick">>
+	<<if $args[0] == "lefthand" or $args[0] == "righthand">>
+		<<set $quickcommand = '<<set $recipeLog = []>><<set $recipeLog.push("lick")>>'>>
+	<</if>>
 	<<print "<<set $objectNameG = $"+$args[0]+"NameG>>">>
 	<<print "<<set $objectActResult = '"+$args[0]+"Lick'>>">>
 	<<if $args[1]>>
@@ -846,8 +907,8 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	<<else>>
 		<<set $objectActResult = "Ты лижешь "+$objectNameG+".">>
 	<</if>>
-	<<print "<<set $"+$args[0]+"Salted = 0>>">>
-	<<print "<<click '"+$linktext+"'>><<actrefresh '"+$args[0]+"' '"+$linktext+"' '"+$objectActResult+"'>><</click>>">>
+	/%<<print "<<set $"+$args[0]+"Salted = 0>>">>%/
+	<<print "<<click '"+$linktext+"'>>"+$quickcommand+"<<set $"+$args[0]+"Salted = 0>><<set $"+$args[0]+"Limed = 0>><<actrefresh '"+$args[0]+"' '"+$linktext+"' '"+$objectActResult+"'>><</click>>">>
 <</widget>>
 
 

@@ -686,7 +686,7 @@ button:active, #ui-body-close:active {
 }
 
 
-#disclaimer {
+.disclaimer {
 	width: 100%;
 	height: 400px;
 	background-color: black;
@@ -697,18 +697,18 @@ button:active, #ui-body-close:active {
     border-radius: 5px;
 }
 
-#disclaimer table{
+.disclaimer table{
 	width: 100%;
 	height: 100%;
 }
 
-#disclaimer table, #disclaimer th, #disclaimer tr {
+.disclaimer table, .disclaimer th, .disclaimer tr {
 	margin: 0;
 	padding: 0;
 	border: none;
 }
 
-#plus18 {
+.plus18 {
 	line-height: 2.5em;
 	width: 2.5em;
 	margin: auto;
@@ -717,7 +717,7 @@ button:active, #ui-body-close:active {
 	border-radius: 2em;
 }
 
-#warning {
+.warning {
 }
 
 .decor > a {
@@ -728,11 +728,16 @@ button:active, #ui-body-close:active {
 	white-space: normal;
 }
 
+.actions, .outcome {
+	display: block;
+	text-align: center;
+}
+
 .hidden {
 	display: none;
 }
 
-#events {
+.events {
 	font-style: italic;
 }
 
@@ -747,7 +752,7 @@ button:active, #ui-body-close:active {
     text-decoration: none;
 }
 
-#commandline {
+.commandline {
 	overflow: hidden;
 	margin-bottom: 1em;
 	background-color: #333;
@@ -756,22 +761,22 @@ button:active, #ui-body-close:active {
     font-size: 14px;
 }
 
-#hint {
+.hint {
 	float:left;
 	margin: 0;
 	padding: 0.3em 0.5em;
 }
 
-#hint > a {
+.hint > a {
 	color: inherit;
 	font-weight: normal;
 }
 
-#hint > a:hover {
+.hint > a:hover {
 	text-decoration: underline;
 }
 
-#drunkness {
+.drunkness {
 	float:right;
 	margin: 0;
 	padding: 0.3em 0.5em;
