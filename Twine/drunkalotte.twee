@@ -12,16 +12,16 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 :: StoryInit
 <<display "BarInit">>
 <<display "BasicRecipeInit">>
-<<display "DeepBombInit">>
+<<display "DepthChargeInit">>
 <<display "PalomaChaserInit">>
 <<set $historyArr = []>>
 <<set $drunkness = 60>>
 <<set $hour = 23>>
 <<set $minute = 55>>
 /%<<set $AllGodsNames = ["Бесстрашный экспериментатор", "Гениальный комик", "Ловкий акробат", "Танцор от бога", "Непобедимый герой", "Одарённый певец", "Душа вечеринки", "Король мира", "Император вселенной", "Мертвец"]>>%/
-<<set $AllGodsNames = ["Бесстрашный экспериментатор", "Непобедимый герой", "Одарённый певец", "Душа вечеринки", "Король мира", "Император вселенной", "Мертвец"]>>
+<<set $AllGodsNames = ["Бесстрашный экспериментатор", "Непобедимый герой", "Одарённый певец", "Душа вечеринки", "Король мира", "Император вселенной", "Мертвец", "Мертвец"]>>
 <<set $tableBasicRecipe = "[[Текила с лаймом и солью|Explanations][$recipe = 'BasicRecipe']]">>
-<<set $tableDeepBomb = "[[Глубинная бомба|Explanations][$recipe = 'DeepBomb']]">>
+<<set $tableDepthCharge = "[[Глубинная бомба|Explanations][$recipe = 'DepthCharge']]">>
 <<set $tablePalomaChaser = "[[Палома чейзер|Explanations][$recipe = 'PalomaChaser']]">>
 
 :: NULL
@@ -58,7 +58,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	<<goto "Start2">>
 
 :: Start [nobr]
-<div class="disclaimer"><table><tr><th><div class="plus18">18+</div></th></tr><tr><th style="vertical-align:top"><div class="warning">Употребление алкоголя вредит вашему здоровью<br><br>[[Мне больше 18-ти|DeepBomb][$recipe = "DeepBomb"]]/%[[Мне больше 18-ти|Start2]]%/</div></th></tr></table></div>
+<div class="disclaimer"><table><tr><th><div class="plus18">18+</div></th></tr><tr><th style="vertical-align:top"><div class="warning">Употребление алкоголя вредит вашему здоровью<br><br>[[Мне больше 18-ти|DepthCharge][$recipe = "DepthCharge"]]/%[[Мне больше 18-ти|Start2]]%/</div></th></tr></table></div>
 
 :: Start2
 	Часы над головой бармена показывают, что прошло уже три часа с тех пор, как ты зашёл в этот бар. Конечно, изначально ты планировал лишь спокойно выпить чашечку кофе после тяжёлого трудового дня, может быть, выкурить пару сигарет, а потом вернуться домой к ужину. Однако, как это часто бывает в этих делах, все планы были разрушены встречей со старым приятелем. В результате, после шести кружек пива, двух гневных звонков из дома и трёх походов в туалет, кто-то из вас высказал предложение поэкспериментировать.
@@ -94,14 +94,14 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 <center>
 |!<center>№</center>|!<center>Название</center>|!<center>Сложность</center>|!<center>Крепость</center>|
 |<center>1</center>|<<print $tableBasicRecipe>>|<center>★★☆</center>|<center>★★☆</center>|
-|<center>2</center>|<<print $tableDeepBomb>>|<center>★☆☆</center>|<center>★★★</center>|
+|<center>2</center>|<<print $tableDepthCharge>>|<center>★☆☆</center>|<center>★★★</center>|
 |<center>3</center>|<<print $tablePalomaChaser>>|<center>★★★</center>|<center>★★☆</center>|
 <br></center>
 
 :: Explanations [nobr]
 	<<if $recipe == "BasicRecipe">>
 		«Это самый известный способ пить текилу — вы, наверняка, его знаете. У вас будет долька лайма, соль и стопка текилы. Нужно лаймом намочить руку, вот здесь, — он показывает на место между большим и указательным пальцами своей руки. — И затем посыпать её солью. И всё. Дальше только три быстрых действия: слизываете соль, выпиваете текилу и закусываете лаймом. Правда, легко? Выбираете этот рецепт?»
-	<<elseif $recipe == "DeepBomb">>
+	<<elseif $recipe == "DepthCharge">>
 		«Глубинная бомба — очень простой в приготовлении коктейль. В высокий стакан наливаете на три четверти светлого лагера и аккуратно опускаете в него стопку с текилой. Когда стопка опускается на дно стакана, начинаете пить пиво и, в конце концов, текилу. Одним махом. Только медленно, чтобы стопкой не ударило по зубам. Вот и весь рецепт. Выбираете этот коктейль?»
 	<<elseif $recipe = "PalomaChaser">>
 		«В Паломе много составляющих, поэтому он считается относительно сложным. В стопку наливаете медовый сироп, 10 мл., затем добавляете грейпфрутовый сок, 30 мл. Туда же выжимаете половинку лайма и сыпите щепотку соли. Перемешиваете коктейльной ложкой. Всё, чейзер готов. Выпиваете стопку текилы и запиваете стопкой чейзера. Выбираете его?»
@@ -152,8 +152,8 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	<br>
 	<<if $recipe == "BasicRecipe">>
 		...лаймом намочить руку, посыпать её солью, слизать соль, выпить текилу, закусить лаймом...
-	<<elseif $recipe == "DeepBomb">>
-		...налить 3/4 светлого лагера в стакан, опустить туда стопку, всё выпить одним махом...
+	<<elseif $recipe == "DepthCharge">>
+		...налить 3/4 светлого лагера в стакан, опустить туда стопку, залпом всё выпить...
 	<<elseif $recipe = "PalomaChaser">>
 		...в стопку влить 10 мл. медового сиропа, 30 мл. грейпфрутового сока, выжать половинку лайма, добавить щепотку соли, перемешать коктейльной ложкой, выпить текилу, запить чейзером...
 	<</if>>
@@ -226,7 +226,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 		<<addclass ".focus" "turnoff">>
 		<<addclass ".actions" "hidden">>
 		<<addclass ".hint" "turnoff">>
-		<<set $args[2] = "Ты прикладываешь стопку к губам, запрокидываешь голову и, с трудом проглотив текилу, вдруг чувствуешь, как подкатывает тошнота.">>
+		<<set $args[2] = "Ты прикладываешь стопку к губам, запрокидываешь голову и, с трудом проглотив текилу, вдруг чувствуешь, как к горлу подкатывает тошнота.">>
 		<<replace ".outcome">>
 			<br>[[...|BasicRecipeOutcome][$outcome = 0]]
 		<</replace>>
@@ -541,7 +541,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	<<print ($tequilaSalted ? " На дне видны несколько медленно растворяющихся кристалликов соли." : "")>>
 :: shotInv [nobr]
 	<<if $shotChildren[0] == "tequila">>
-		пятидесятиграммовая <<object "стопка" "shot">> с <<object "текилой" "tequila">>
+		<<object "стопка" "shot">> с <<object "текилой" "tequila">>
 	<<else>>
 		пустая пятидесятиграммовая <<object "стопка" "shot">>
 	<</if>>
@@ -556,15 +556,31 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 		<<if $shotChildren[0]>>
 			<<Drink "tequila">><br>
 		<</if>>
-		<<PutOn "shot" "поставить">><br>
+		<<PutOn "shot" "counter" "поставить" "на">><br>
 		<<ChangeHands "shot">>
 	<</if>>
 :: shotPutOnCounter [nobr]
 	Ты со стуком ставишь стопку на <<object "стойку" "counter">>.
 :: shotPutOnHighball [nobr]
-	Опускание стопки в стакан.
+	<<if $highballBeer < 3>>
+		Ты отпускаешь стопку с текилой в <<object "стакан" "highball">>, но так как <<object "пива" "beer">> в стакане недостаточно, стопка не опускается, а падает и расплёскивается, смешав напитки и испортив весь коктейль.
+		<<set $highballBeer++>>
+	<<elseif $highballBeer == 3>>
+		Ты отпускаешь стопку с текилой в <<object "стакан" "highball">> и она аккуратно спускается на дно. Вспенившееся <<object "пиво" "beer">> поднимается до края стакана, но не выше. Можно пить.
+		<<set $highballBeer++>>
+	<<elseif $highballBeer == 4>>
+		Ты отпускаешь стопку с текилой в <<object "стакан" "highball">>, но так как тот был полон, вспенившееся <<object "пиво" "beer">> резко поднимается и выплёскивается через край, заливая стойку вокруг. Ты безуспешно пытаешься сдержать растекание пивной лужи кипой салфеток, пока на помощь не приходит бармен. Коктейль, очевидно, испорчен.
+	<</if>>
 :: shotPutOnHighballAct [nobr]
+	<<moveobj "shot" "highball">>
 	<<set $shotDisabled = 1>>
+	<<if $highballBeer < 3>>
+		<<set $DepthChargeCondition = -1>>
+	<<elseif $highballBeer > 3>>
+		<<set $DepthChargeCondition = 1>>
+	<<else>>
+		<<unset $DepthChargeCondition>>
+	<</if>>
 :: shotSalt [nobr]
 	<<if $shotChildren[0]>>
 		<<display "tequilaSalt">>
@@ -623,7 +639,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 		                  #####                                                                                            
 %/
 
-:: DeepBombInit [nobr]
+:: DepthChargeInit [nobr]
 	<<display "shotInit">>
 	<<display "tequilaInit">>
 	<<display "counterInit">>
@@ -633,7 +649,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	<<display "highballInit">>
 	<<display "beerInit">>
 	<<display "bottleInit">>
-:: DeepBomb [nobr]
+:: DepthCharge [nobr]
 	<<set $counterChildren = ["bottle", "highball", "shot"]>>
 	<<set $recipeLog = []>>
 	<<set $recipeInv = "<<display 'counterInv'>> <<display 'handsInv'>>">>
@@ -645,18 +661,18 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	<span class="actions"></span>
 	<span class="events"></span>
 	<span class="outcome"></span>
-:: DeepBombDaemon [nobr]
-	<<replace ".beta">><<print $bottleBeer>>+<<print $highballBeer>><</replace>>
-	<<if $recipeLog[0] == "1">>
+:: DepthChargeDaemon [nobr]
+	<<replace ".beta">><<print $shotChildren.toString()>><</replace>>
+	<<if $recipeLog[0] == "done">>
 		<<addclass ".decor" "turnoff">>
 		<<addclass ".inventory" "turnoff">>
 		<<addclass ".history" "turnoff">>
 		<<addclass ".focus" "turnoff">>
 		<<addclass ".actions" "hidden">>
 		<<addclass ".hint" "turnoff">>
-			<<set $args[2] = "Ты прикладываешь стопку к губам, запрокидываешь голову, проглатываешь маслянистую жидкость и с победной улыбкой водружаешь пустую стопку на стойку.">>
+			<<set $args[2] = "Ты, наконец, допиваешь остатки пива вперемешку с текилой — стопка легонько стукается о зубы — и, отняв стакан ото рта, шумно выдыхаешь, вытираешь выступившие слёзы и с победной улыбкой водружаешь пустой стакан на стойку.">>
 		<<replace ".outcome">>
-			<br>[[Сделано!|DeepBombOutcome][$outcome = 1]]
+			<br>[[Сделано!|DepthChargeOutcome][$outcome = 1]]
 		<</replace>>
 	<<elseif $drunkness == 120>>
 		<<addclass ".decor" "turnoff">>
@@ -665,49 +681,46 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 		<<addclass ".focus" "turnoff">>
 		<<addclass ".actions" "hidden">>
 		<<addclass ".hint" "turnoff">>
-			<<set $args[2] = "Ты прикладываешь стопку к губам, запрокидываешь голову и, с трудом проглотив текилу, вдруг чувствуешь, как подкатывает тошнота.">>
+		<<if $args[1] == "Продолжать пить пиво">>
+			<<set $args[2] = "Ты большими глотками пьёшь пиво из стакана и вдруг чувствуешь, как к горлу подкатывает тошнота.">>
+		<<else>>
+			<<set $args[2] = "Ты прикладываешь стопку к губам, запрокидываешь голову и, с трудом проглотив текилу, вдруг чувствуешь, как к горлу подкатывает тошнота.">>
+		<</if>>
 		<<replace ".outcome">>
-			<br>[[...|DeepBombOutcome][$outcome = 0]]
+			<br>[[...|DepthChargeOutcome][$outcome = 0]]
 		<</replace>>
 	<<else>>
 		<<if $args[1] != "Продолжать пить пиво" && $args[1] != "Начать пить пиво" && $args[2]>>
 			<<unset $beerDrinking>>
 		<</if>>
-		<<if $args[2] && $args[1] != "Налить пиво в стакан">>
-			<<unset $bottlePouring>>
-		<</if>>
-		<<if $bottlePouring && $args[1] != "Налить пиво в стакан">>
-			<<set $bottleBeer-->>
-			<<set $highballBeer++>>
-			<<if $bottleBeer > 0>>
-				<<set $DeepBombEvent = "Параллельно ты продолжаешь лить пиво в стакан.">>
-			<<else>>
-				<<set $DeepBombEvent = "Параллельно ты выливаешь остатки пива из бутылки в стакан.">>
-				<<unset $bottlePouring>>
-			<</if>>
-		<</if>>
-		<<if $highballBeer > 4>>
-			<<set $DeepBombEvent = "Отвлекшись, ты не замечаешь, что продолжаешь лить пиво в уже полный стакан. На данное обстоятельство твоё внимание обращает приятель, вдруг прооравший что-то нецензурное. Некоторое время до прихода бармена ты сражаешься с расплывающейся пивной лужей кипой салфеток.">>
-			<<set $highballBeer = 4>>
+		<<if $args[1] != "Наливать пиво в стакан" && $args[1] != "Продолжать наливать пиво в стакан" && $args[2]>>
 			<<unset $bottlePouring>>
 		<</if>>
 		<<if !$shotChildren.contains("tequila") and $counterChildren.contains("shot")>>
 			<<display "tequilaInit">>
 			<<set $shotChildren.push("tequila")>>
-			<<set $DeepBombEvent = "Бармен ловким движением наполняет твою стопку.">>
+			<<set $DepthChargeEvent = "Бармен ловким движением наполняет твою стопку.">>
 		<</if>>
 		<<if $bottleBeer == 0 and $counterChildren.contains("bottle")>>
 			<<display "bottleInit">>
-			<<set $DeepBombEvent = "Бармен забирает пустую бутылку и, пшикнув крышкой, выставляет перед тобой свежую.">>
+			<<set $DepthChargeEvent = "Бармен забирает пустую бутылку и, пшикнув крышкой, выставляет перед тобой свежую.">>
+		<</if>>
+		<<if !$shotChildren.contains("tequila") && !$highballChildren.contains("beer") && $counterChildren.contains("highball") && $highballChildren.contains("shot")>>
+			<<display "tequilaInit">>
+			<<display "shotInit">>
+			<<display "highballInit">>
+			<<set $counterChildren.push("shot")>>
+			<<unset $DepthChargeCondition>>
+			<<set $DepthChargeEvent = "Бармен забирает твой стакан, выставляет чистый и наливает текилу в новую стопку.">>
 		<</if>>
 	<</if>>
-:: DeepBombOutcome [nobr]
+:: DepthChargeOutcome [nobr]
 	<<if $outcome>>
 		«Отлично, — говорит подошедший бармен. — Я засчитываю вам „Глубинную бомбу“». С этими словами он вычёркивает второй коктейль в списке.
 		<br>
 		«Выбирайте следующий».
 		<br>
-		<<set $tableDeepBomb = "''==Глубинная бомба==''">>
+		<<set $tableDepthCharge = "''==Глубинная бомба==''">>
 		<<display "Table">>
 	<<else>>
 		<<display "BadEnd">>
@@ -747,12 +760,13 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	<<else>>
 		<<if $bottleBeer > 0>>
 			<<if !$bottlePouring>>
-				<<if $highballBeer < 4>>
-					<<ActVerb "beer" "Налить пиво в стакан" "bottlePourBeer">><br>
+				<<if $highballBeer < 4 && !$highballChildren.contains("shot")>>
+					<<ActVerb "beer" "Наливать пиво в стакан" "bottlePourBeer">><br>
 				<<else>>
-					<<NoActVerb "beer" "Налить пиво в стакан" "bottlePourBeerFail">><br>
+					<<NoActVerb "beer" "Наливать пиво в стакан" "bottlePourBeerFail">><br>
 				<</if>>
 			<<else>>
+				<<ActVerb "beer" "Продолжать наливать пиво в стакан" "bottlePourContinue">><br>
 				<<ActVerb "beer" "Прекратить наливать пиво в стакан" "bottlePourStop">><br>
 			<</if>>
 			<<NoActVerb "beer" "Пить из бутылки" "bottleDrinkFail">><br>
@@ -765,7 +779,11 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 :: bottleDrinkFail [nobr]
 	Ты принюхиваешься и уже было собираешься сделать глоток, но потом передумываешь — ты всё-таки в баре, из бутылок здесь пить не принято.
 :: bottlePourBeerFail [nobr]
-	Ты собираешься было долить пива в <<object "стакан" "highball">>, но тот уже полон.
+	<<if $highballChildren.contains("shot")>>
+		Сейчас внутри <<object "стакана" "highball">> стоит стопка <<print ($shotChildren.contains("tequila") ? "" : "из-под ")>>текилы. Наливать в него пиво нет смысла.
+	<<elseif $highballBeer = 4>>
+		Ты собираешься было долить пива в <<object "стакан" "highball">>, но тот уже полон.
+	<</if>>
 :: bottlePourBeer [nobr]
 	<<if $bottleBeer > 0>>
 		Ты подносишь бутылку к <<object "стакану" "highball">> и начинаешь наливать <<object "пиво" "beer">>
@@ -782,6 +800,24 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	<<set $bottlePouring = 1>>
 	<<set $bottleBeer-->>
 	<<set $highballBeer++>>
+:: bottlePourContinue [nobr]
+	<<if $highballBeer > 4>>
+		Отвлекшись, ты не замечаешь, что продолжаешь лить <<object "пиво" "beer">> в уже полный <<object "стакан" "highball">>. На данное обстоятельство твоё внимание обращает приятель, вдруг прооравший что-то нецензурное. Некоторое время до прихода бармена ты сражаешься с расплывающейся пивной лужей кипой салфеток, пока тот не вытирает <<object "стойку" "counter">>.
+		<<set $highballBeer = 4>>
+	<<elseif $bottleBeer > 0>>
+		Ты <<print ($bottleBeer == 1 ? "всё " : "")>>продолжаешь лить <<object "пиво" "beer">> в <<object "стакан" "highball">>.
+	<<else>>
+		Ты выливаешь остатки <<object "пива" "beer">> из бутылки в <<object "стакан" "highball">>.
+	<</if>>
+:: bottlePourContinueAct [nobr]
+	<<set $bottleBeer-->>
+	<<set $highballBeer++>>
+	<<if $bottleBeer == 0>>
+		<<unset $bottlePouring>>
+	<</if>>
+	<<if $highballBeer > 4>>
+		<<unset $bottlePouring>>
+	<</if>>
 :: bottlePourStop [nobr]
 	Ты останавливаешься, когда 
 	<<if $highballBeer == 4>>
@@ -817,9 +853,18 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	<<else>>
 		. Пустой.
 	<</if>>
+	<<if $highballChildren.contains("shot")>>
+		<<if $shotChildren.contains("tequila")>>
+			Внутри стакана стоит стопка с текилой.
+		<<else>>
+			Внутри стоит стопка из-под текилы.
+		<</if>>
+	<</if>>
 :: highballInv [nobr]
-	<<if $highballChildren[0] == "beer">>
-		<<object "стакан" "highball">> с <<object "пивом" "beer">>
+	<<if $highballChildren.contains("beer")>>
+		<<object "стакан" "highball">> с <<object "пивом" "beer">><<print ($highballChildren.contains("shot") ? " и со стопкой текилы внутри" : "")>>
+	<<elseif $highballChildren.contains("shot")>>
+		<<object "стакан" "highball">> с пустой стопкой внутри
 	<<else>>
 		пустой <<object "стакан" "highball">>
 	<</if>>
@@ -828,7 +873,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	<<if $highballParent != "lefthand" and $highballParent != "righthand">>
 		<<Take "highball">>
 	<<else>>
-		<<if $highballChildren[0]>>
+		<<if $highballChildren.contains("beer")>>
 			<<if !$beerDrinking>>
 				<<Drink "beer" "начать пить">>
 				<br>
@@ -854,7 +899,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	<<unset $beerDisabled $beerDrinking>>
 	<<set $beerDrinkTimes = 0>>
 :: beerDesc [nobr]
-	Насыщенный свежий лагер с <<print ($beerDrinking ? "отличным, чуть горьковатым вкусом" : "шапкой белой пены. Со дна поднимаются пузырьки газа")>>.
+	Насыщенный свежий лагер с <<print ($beerDrinking ? "отличным, чуть горьковатым вкусом" : "шапкой белой пены. Со дна поднимаются пузырьки газа")>>.<<print ($highballChildren.contains("shot") ? " Внутри видна стопка." : "")>>
 :: beerInv [nobr]
 	<<object "пиво" "beer">>
 :: beerAct [nobr]
@@ -883,27 +928,41 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	<</if>>
 :: beerDrink [nobr]
 	<<if $highballBeer == 3>>
-		Ты прикладываешься к <<object "стакану" "highball">> и начинаешь пить пиво большими глотками.
+		Ты прикладываешься к <<object "стакану" "highball">> и начинаешь пить пиво большими глотками<<print ($highballChildren.contains("shot") ? ", следя за стопкой внутри." : ".")>>
 	<<elseif $highballBeer == 2>>
 		<<if $beerJustStarted>>
 			Ты прикладываешься к <<object "стакану" "highball">> и пьёшь пиво, всё выше поднимая хайболл. Уровень пива уменьшается до половины стакана.
 		<<else>>
-			Ты продолжаешь пить пиво, всё выше поднимая стакан. Уровень пива уменьшается до половины <<object "стакана" "highball">>.
+			Ты продолжаешь пить пиво, всё выше поднимая <<object "стакан" "highball">>. Уровень пива уменьшается до половины стакана.<<print ($highballChildren.contains("shot") ? " Стопка вот-вот сдвинется с места." : "")>>
 		<</if>>
 	<<elseif $highballBeer == 1>>
 		<<if $beerJustStarted>>
-			Ты опять прикладываешься к <<object "стакану" "highball">>, в котором остаётся не больше четверти напитка.
+			Ты прикладываешься к <<object "стакану" "highball">> и в нём остаётся не больше четверти напитка.
 		<<else>>
 			Ты продолжаешь пить пиво, не останавливаясь. В <<object "стакане" "highball">> остаётся не больше четверти напитка.
 		<</if>>
+		<<print ($highballChildren.contains("shot") ? " Стопка медленно ползёт к краю стакана. Ты уже чувствуешь привкус текилы в пиве." : "")>>
 	<<elseif $highballBeer == 0>>
 		<<if $beerJustStarted>>
-			Ты выдыхаешь и махом допиваешь остатки пива.
+			<<if $highballChildren.contains("shot")>>
+				Ты выдыхаешь и опрокидываешь <<object "стакан" "highball">>, забыв про стопку внутри. Она больно бьёт тебя по зубам и ты едва не разбрызгиваешь остатки пива. Мда, не вышло.
+			<<else>>
+				Ты выдыхаешь и опрокидываешь <<object "стакан" "highball">>, допивая остатки пива.
+			<</if>>
 		<<else>>
-			Ты, наконец, допиваешь остатки пива и, отняв <<object "стакан" "highball">> ото рта, шумно выдыхаешь и вытираешь выступившие слёзы.
+			<<if $highballChildren.contains("shot")>>
+				Ты, наконец, допиваешь остатки пива вперемешку с текилой — стопка легонько стукается о зубы — и, отняв <<object "стакан" "highball">> ото рта, шумно выдыхаешь и вытираешь выступившие слёзы.
+			<<else>>
+				Ты, наконец, допиваешь остатки пива и, отняв <<object "стакан" "highball">> ото рта, шумно выдыхаешь и вытираешь выступившие слёзы.
+			<</if>>
 		<</if>>
 	<</if>>
 :: beerDrinkAct [nobr]
+	<<if !$beerDrinking == 1>>
+		<<set $beerJustStarted = 1>>
+	<<else>>
+		<<unset $beerJustStarted>>
+	<</if>>
 	<<set $beerDrinking = 1>>
 	<<set $minute += 5>>
 	<<set $recipeLog.push("drinkBeer")>>
@@ -914,11 +973,13 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	<<set $highballBeer-->>
 	<<if $highballBeer == 0>>
 		<<removeobj "beer">>
-	<</if>>
-	<<if !$beerJustStarted>>
-		<<set $beerJustStarted = 1>>
-	<<else>>
-		<<unset $beerJustStarted>>
+		<<if $highballChildren.contains("shot")>>
+			<<if !$beerJustStarted && !$DepthChargeCondition>>
+				<<set $recipeLog[0] = "done">>
+			<</if>>
+			<<removeobj "tequila">>
+			<<set $drunkness += 10>>
+		<</if>>
 	<</if>>
 :: beerStopDrinking [nobr]
 	Ты отнимаешь <<object "стакан" "highball">> ото рта и выдыхаешь. В нём ещё остаётся <<if $highballBeer == 3>>три четверти<<elseif $highballBeer == 2>>половина<<elseif $highballBeer == 1>>четверть<</if>> пива.
@@ -946,7 +1007,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 		<br>
 		«Выбирайте следующий».
 		<br>
-		<<set $tableDeepBomb = "''==Глубинная бомба==''">>
+		<<set $tableDepthCharge = "''==Глубинная бомба==''">>
 		<<display "Table">>
 	<<else>>
 		<<display "BadEnd">>
