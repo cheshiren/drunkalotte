@@ -447,7 +447,7 @@ body {
 }
 
 #ui-bar {
-	display: none;
+	/*display: none;*/
 	position: fixed;
 	z-index: 50;
 	top: 0;
