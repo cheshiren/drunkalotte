@@ -55,12 +55,15 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 
 :: Restart [nobr]
 	<<display "StoryInit">>
-	<<goto "Start2">>
+	<<goto "Mephisto">>
 
 :: Start [nobr]
-<div class="disclaimer"><table><tr><th><div class="plus18">18+</div></th></tr><tr><th style="vertical-align:top"><div class="warning">Употребление алкоголя вредит вашему здоровью<br><br>[[Мне больше 18-ти|DepthCharge][$recipe = "DepthCharge"]]/%[[Мне больше 18-ти|Start2]]%/</div></th></tr></table></div>
+<div class="disclaimer"><table><tr><th><div class="plus18">18+</div></th></tr><tr><th style="vertical-align:top"><div class="warning">Употребление алкоголя вредит вашему здоровью<br><br>[[Мне больше 18-ти|PalomaChaser][$recipe = "PalomaChaser"]]/%[[Мне больше 18-ти|Title]]%/</div></th></tr></table></div>
 
-:: Start2
+:: Title [nobr]
+<div class="title disclaimer"><table><tr><th><div class="plus18" style="font-family:Comfortaa;font-size:50px;line-height: 1em; width: 100%;border:none;">[[НАЛИВАЙЯ|Mephisto]]</div></th></tr></table></div>
+
+:: Mephisto
 	Часы над головой бармена показывают, что прошло уже три часа с тех пор, как ты зашёл в этот бар. Конечно, изначально ты планировал лишь спокойно выпить чашечку кофе после тяжёлого трудового дня, может быть, выкурить пару сигарет, а потом вернуться домой к ужину. Однако, как это часто бывает в этих делах, все планы были разрушены встречей со старым приятелем. В результате, после шести кружек пива, двух гневных звонков из дома и трёх походов в туалет, кто-то из вас высказал предложение поэкспериментировать.
 	Вы подозвали бармена и спросили его о каком-нибудь достойном коктейле, который можно попробовать двум взрослым мужчинам.
 	«Замечательно, что вы спросили, — ответствовал он с широкой улыбкой. — В этом месяце наш бар проводит акцию „Выстрел в ногу“. Её суть следующая: у меня есть список из нескольких коктейлей на основе текилы, которые вы должны выпить. Если у вас это получается, то бар полностью берёт на себя весь ваш счёт».
@@ -68,10 +71,10 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	Улыбка бармена становится ещё шире: «Коктейли вы готовите себе сами. Засчитываются только правильно приготовленные напитки, но вы обязаны выпить всё, что смешаете».
 	Снова переглянувшись и пожав плечами, вы просите показать список.
 	
-	<center>[[Поехали!|Start3]]</center>
+	<center>[[Поехали!|AbandonHope]]</center>
 	/%<<display "MainScreen">>%/
 
-/%:: Start3
+/%:: AbandonHope
 	<<print "<span class="+$loc+">???</span>">>
 	<br>	«Пожалуйста, — говорит бармен и выкладывает перед вами броско оформленный картонный лист. — Всего вы должны приготовить и выпить шесть коктейлей. В нескольких случаях у вас есть выбор, например, можете остановиться на „Эль Бандито“ вместо „Глубинной бобмы“ — он легче в приготовлении. Выбирайте коктейль и я расскажу, как его смешивать».
 <center>
@@ -86,7 +89,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 |~|Палома чейзер|<center>★★☆</center>|<center>★★☆</center>|
 |<center>6</center>|Красный пёс|<center>★★☆</center>|<center>★★☆</center>|
 </center>%/
-:: Start3
+:: AbandonHope
 	«Пожалуйста, — говорит бармен и выкладывает перед каждым по броско оформленному картонному листу. — Всего вы должны приготовить и выпить три коктейля. Выбирайте какой-нибудь и я расскажу, как его смешивать».
 <<display "Table">>
 
@@ -104,7 +107,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	<<elseif $recipe == "DepthCharge">>
 		«Глубинная бомба — очень простой в приготовлении коктейль. В высокий стакан наливаете на три четверти светлого лагера и аккуратно опускаете в него стопку с текилой. Когда стопка опускается на дно стакана, начинаете пить пиво и, в конце концов, текилу. Одним махом. Только медленно, чтобы стопкой не ударило по зубам. Вот и весь рецепт. Выбираете этот коктейль?»
 	<<elseif $recipe = "PalomaChaser">>
-		«В Паломе много составляющих, поэтому он считается относительно сложным. В стопку наливаете медовый сироп, 10 мл., затем добавляете грейпфрутовый сок, 30 мл. Туда же выжимаете половинку лайма и сыпите щепотку соли. Перемешиваете коктейльной ложкой. Всё, чейзер готов. Выпиваете стопку текилы и запиваете стопкой чейзера. Выбираете его?»
+		«В Паломе много составляющих, поэтому он считается относительно сложным. В стопку наливаете медовый сироп, 10 мл., затем добавляете грейпфрутовый сок, 30 мл. Туда же выжимаете дольку лайма и сыпите щепотку соли. Перемешиваете коктейльной ложкой. Всё, чейзер готов. Выпиваете стопку текилы и запиваете стопкой чейзера. Выбираете его?»
 	<</if>>
 	<center><br>
 	[[Поехали-поехали!|$recipe]]
@@ -155,7 +158,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	<<elseif $recipe == "DepthCharge">>
 		...налить 3/4 светлого лагера в стакан, опустить туда стопку, залпом всё выпить...
 	<<elseif $recipe = "PalomaChaser">>
-		...в стопку влить 10 мл. медового сиропа, 30 мл. грейпфрутового сока, выжать половинку лайма, добавить щепотку соли, перемешать коктейльной ложкой, выпить текилу, запить чейзером...
+		...в стопку влить 10 мл. медового сиропа, 30 мл. грейпфрутового сока, выжать дольку лайма, добавить щепотку соли, перемешать коктейльной ложкой, выпить текилу, запить чейзером...
 	<</if>>
 
 :: HowDrunkAreYou [nobr]
@@ -727,6 +730,10 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	<</if>>
 
 
+
+
+
+
 :: bottleInit [nobr]
 	<<set $bottleChildren = []>>
 	<<set $bottleName = "бутылка">>
@@ -999,7 +1006,30 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 %/
 
 :: PalomaChaserInit [nobr]
+	<<display "shotInit">>
+	<<display "tequilaInit">>
+	<<display "plateInit">>
+	<<display "limeInit">>
+	<<display "salterInit">>
+	<<display "honeyInit">>
+	<<display "juiceInit">>
+	<<display "jiggerInit">>
+	<<display "counterInit">>
+	<<display "handsInit">>
+	<<display "lefthandInit">>
+	<<display "righthandInit">>
 :: PalomaChaser [nobr]
+	<<set $counterChildren = ["shot", "plate", "salter", "honey", "juice", "jigger", "spoon"]>>
+	<<set $recipeLog = []>>
+	<<set $recipeInv = "<<display 'counterInv'>> <<display 'handsInv'>>">>
+	<div class="commandline"><p class="hint"><<click "Палома чейзер">><<replace ".events">><<display "Hint">><</replace>><</click>></p><p class="drunkness"><<display "HowDrunkAreYou">></p></div>
+	<span class="decor"><<display "BarDescription">></span>
+	<span class="inventory"><<print $recipeInv>></span>
+	<span class="history"></span>
+	<span class="focus"></span>
+	<span class="actions"></span>
+	<span class="events"></span>
+	<span class="outcome"></span>
 :: PalomaChaserDaemon [nobr]
 :: PalomaChaserOutcome [nobr]
 	<<if $outcome>>
@@ -1007,11 +1037,63 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 		<br>
 		«Выбирайте следующий».
 		<br>
-		<<set $tableDepthCharge = "''==Глубинная бомба==''">>
+		<<set $tableDepthCharge = "''==Палома чейзер==''">>
 		<<display "Table">>
 	<<else>>
 		<<display "BadEnd">>
 	<</if>>
+
+
+
+
+
+
+:: honeyInit [nobr]
+	<<set $honeyChildren = []>>
+	<<set $honeyName = "медовый сироп">>
+	<<set $honeyNameG = "медовый сироп">>
+	<<set $honeyParent = "counter">>
+	<<unset $honeyDisabled>>
+:: honeyDesc [nobr]
+:: honeyInv [nobr]
+	бутылка <<object "медового сиропа" "honey">>
+:: honeyAct [nobr]
+
+
+:: juiceInit [nobr]
+	<<set $juiceChildren = []>>
+	<<set $juiceName = "сок">>
+	<<set $juiceNameG = "сок">>
+	<<set $juiceParent = "counter">>
+	<<unset $juiceDisabled>>
+:: juiceDesc [nobr]
+:: juiceInv [nobr]
+	коробка грейпфрутового <<object "сока" "juice">>
+:: juiceAct [nobr]
+
+
+:: jiggerInit [nobr]
+	<<set $jiggerChildren = []>>
+	<<set $jiggerName = "джиггер">>
+	<<set $jiggerNameG = "джиггер">>
+	<<set $jiggerParent = "counter">>
+	<<unset $jiggerDisabled>>
+:: jiggerDesc [nobr]
+:: jiggerInv [nobr]
+	<<object "джиггер" "jigger">>
+:: jiggerAct [nobr]
+
+
+:: spoonInit [nobr]
+	<<set $spoonChildren = []>>
+	<<set $spoonName = "ложка">>
+	<<set $spoonNameG = "ложку">>
+	<<set $spoonParent = "counter">>
+	<<unset $spoonDisabled>>
+:: spoonDesc [nobr]
+:: spoonInv [nobr]
+	в высоком тонком стакане коктейльная <<object "ложка" "spoon">>
+:: spoonAct [nobr]
 
 
 

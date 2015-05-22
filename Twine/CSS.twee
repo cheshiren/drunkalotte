@@ -3,6 +3,7 @@
 /* APPEARANCE */
 
 @import url(http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic&subset=cyrillic,latin);
+@import url(http://fonts.googleapis.com/css?family=Kurale|Comfortaa:700&subset=cyrillic);
 
 body {
 	/*запретить выделение текста игроком
@@ -38,7 +39,7 @@ a.link-internal, a.link-external {
 }
 a.link-internal:hover, a.link-external:hover {
 	text-decoration: none;
-}x
+}
 a.link-broken {
 	padding: 3px;
 	color: #000;
@@ -695,6 +696,10 @@ button:active, #ui-body-close:active {
 	font-weight: bold;
     text-align: center;
     border-radius: 5px;
+}
+
+.title {
+	background-color: white;
 }
 
 .disclaimer table{
