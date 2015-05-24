@@ -11,13 +11,11 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 
 :: StoryInit
 <<display "BarInit">>
-<<display "BasicRecipeInit">>
-<<display "DepthChargeInit">>
-<<display "PalomaChaserInit">>
 <<set $historyArr = []>>
 <<set $drunkness = 60>>
 <<set $hour = 23>>
 <<set $minute = 55>>
+<<set $outcome = 0>>
 /%<<set $AllGodsNames = ["Бесстрашный экспериментатор", "Гениальный комик", "Ловкий акробат", "Танцор от бога", "Непобедимый герой", "Одарённый певец", "Душа вечеринки", "Король мира", "Император вселенной", "Мертвец"]>>%/
 <<set $AllGodsNames = ["Бесстрашный экспериментатор", "Непобедимый герой", "Одарённый певец", "Душа вечеринки", "Король мира", "Император вселенной", "Мертвец", "Мертвец"]>>
 <<set $tableBasicRecipe = "[[Текила с лаймом и солью|Explanations][$recipe = 'BasicRecipe']]">>
@@ -58,10 +56,11 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	<<goto "Mephisto">>
 
 :: Start [nobr]
-<div class="disclaimer"><table><tr><th><div class="plus18">18+</div></th></tr><tr><th style="vertical-align:top"><div class="warning">Употребление алкоголя вредит вашему здоровью<br><br>[[Мне больше 18-ти|PalomaChaser][$recipe = "PalomaChaser"]]/%[[Мне больше 18-ти|Title]]%/</div></th></tr></table></div>
+<div class="disclaimer"><table><tr><th><div class="plus18">18+</div></th></tr><tr><th style="vertical-align:top"><div class="warning">Употребление алкоголя вредит вашему здоровью<br><br>/%[[Мне больше 18-ти|PalomaChaser][$recipe = "PalomaChaser"]]%/[[Мне больше 18-ти|Title]]</div></th></tr></table></div>
 
 :: Title [nobr]
-<div class="title disclaimer"><table><tr><th><div class="plus18" style="font-family:Comfortaa;font-size:50px;line-height: 1em; width: 100%;border:none;">[[НАЛИВАЙЯ|Mephisto]]</div></th></tr></table></div>
+/%<div class="title disclaimer"><table><tr><th><div class="plus18" style="font-family:Comfortaa;font-size:50px;line-height: 1em; width: 100%;border:none;">[[НАЛИВАЙЯ|Mephisto]]</div></th></tr></table></div>%/
+<div class="title disclaimer"><table><tr><th style="vertical-align:bottom"><div class="plus18" style="font-family:Comfortaa;font-size:50px;line-height: 1em; width: 100%;border:none">[[НАЛИВАЙЯ|Mephisto]]</div></th></tr><tr><th style="vertical-align:bottom"><div style="color:black;text-align:right;font-size:16px;font-weight:none">[[Вячеслав Добранов|http://cheshire.ifiction.ru/]], май 2015</div></th></tr></table></div>
 
 :: Mephisto
 	Часы над головой бармена показывают, что прошло уже три часа с тех пор, как ты зашёл в этот бар. Конечно, изначально ты планировал лишь спокойно выпить чашечку кофе после тяжёлого трудового дня, может быть, выкурить пару сигарет, а потом вернуться домой к ужину. Однако, как это часто бывает в этих делах, все планы были разрушены встречей со старым приятелем. В результате, после шести кружек пива, двух гневных звонков из дома и трёх походов в туалет, кто-то из вас высказал предложение поэкспериментировать.
@@ -72,8 +71,8 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	Снова переглянувшись и пожав плечами, вы просите показать список.
 	
 	<center>[[Поехали!|AbandonHope]]</center>
-	/%<<display "MainScreen">>%/
 
+:: hhh
 /%:: AbandonHope
 	<<print "<span class="+$loc+">???</span>">>
 	<br>	«Пожалуйста, — говорит бармен и выкладывает перед вами броско оформленный картонный лист. — Всего вы должны приготовить и выпить шесть коктейлей. В нескольких случаях у вас есть выбор, например, можете остановиться на „Эль Бандито“ вместо „Глубинной бобмы“ — он легче в приготовлении. Выбирайте коктейль и я расскажу, как его смешивать».
@@ -174,6 +173,30 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	<br><br>
 	<center>[[Попытать счастья ещё раз?|Restart]]</center>
 
+:: GoodEnd [nobr]
+	Ты плохо помнишь события той ночи, но судя по тем моментам, что вспоминаются, ты отлично провёл время.
+	<br>
+	Вот ты с криком «Паркур!» прыгаешь через большие бетонные клумбы, установленные вдоль тротуара. Потом отплёвываешься и утираешь землю с лица.
+	<br>
+	Вот ты по колено в воде городского центрального фонтана фотографируешься, приобняв статую Афродиты. Она в отместку бьёт в тебя струёй воды.
+	<br>
+	Вот ты старательно не привлекаешь внимания проходящего мимо полицейского патруля, пока твой приятель мочится за углом.
+	<br>
+	Вот вы давитесь от смеха в тёмном переулке, стараясь при этом отдышаться и не выдать себя. На голове у тебя серая полицейская кепка и где-то неподалёку слышен топот берц.
+	<br>
+	Вот ты лежишь в пыли у колеса уазика с заломленными за спину руками. Слышно, как твой приятель куда-то звонит и с кем-то о чём-то договаривается.
+	<br>
+	А вот уже светает. Вы, обнявшись, идёте посередине выцветшей безлюдной улицы и горланите матерные панковские песни. Где-то в ответ лает собака.
+	<br>
+	Потом было одинокое медленное такси, в котором ты уснул, а проснулся уже у своего дома. Вышел, зевнул и, щурясь на встающее солнце, пошёл досыпать.
+	<br>
+	<br>
+	<br>
+	<br>
+	<center>@@font-size:30px;font-weight:bold;КОНЕЦ@@</center>
+	<br>
+	<br>
+
 
 
 
@@ -199,7 +222,9 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	<<display "lefthandInit">>
 	<<display "righthandInit">>
 :: BasicRecipe [nobr]
+	<<display "BasicRecipeInit">>
 	<<set $recipeLog = []>>
+	<<set $historyArr = []>>
 	<<set $recipeInv = "<<display 'counterInv'>> <<display 'handsInv'>>">>
 	<div class="commandline"><p class="hint"><<click "Текила с лаймом и солью">><<replace ".events">><<display "Hint">><</replace>><</click>></p><p class="drunkness"><<display "HowDrunkAreYou">></p></div>
 	<span class="decor"><<display "BarDescription">></span>
@@ -220,7 +245,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 		<<addclass ".hint" "turnoff">>
 		<<set $args[2] = "Ты прикладываешь стопку к губам, запрокидываешь голову, проглатываешь маслянистую жидкость и с победной улыбкой водружаешь пустую стопку на стойку.">>
 		<<replace ".outcome">>
-			<br>[[Сделано!|BasicRecipeOutcome][$outcome = 1]]
+			<br>[[Сделано!|BasicRecipeOutcome][$outcome++]]
 		<</replace>>
 	<<elseif $drunkness == 120>>
 		<<addclass ".decor" "turnoff">>
@@ -231,7 +256,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 		<<addclass ".hint" "turnoff">>
 		<<set $args[2] = "Ты прикладываешь стопку к губам, запрокидываешь голову и, с трудом проглотив текилу, вдруг чувствуешь, как к горлу подкатывает тошнота.">>
 		<<replace ".outcome">>
-			<br>[[...|BasicRecipeOutcome][$outcome = 0]]
+			<br>[[!!!|BasicRecipeOutcome][$outcome = 0]]
 		<</replace>>
 	<<else>>
 		<<if !$plateChildren.contains("lime") and !$lefthandChildren.contains("lime") and !$righthandChildren.contains("lime")>>
@@ -269,10 +294,21 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	<<if $outcome>>
 		«Отлично, — говорит подошедший бармен. — Я засчитываю вам текилу с лаймом и солью». С этими словами он вычёркивает первый коктейль в списке.
 		<br>
-		«Выбирайте следующий»<<print ($counterSalted || $counterLimed ? " — говорит он, протирая стойку перед тобой" : "")>>.
-		<br>
+		<<if $outcome < 3>>
+			«Выбирайте следующий»<<print ($counterSalted || $counterLimed ? " — говорит он, протирая стойку перед тобой" : "")>>.
+			<br>
+		<</if>>
 		<<set $tableBasicRecipe = "''==Текила с лаймом и солью==''">>
 		<<display "Table">>
+		<<if $outcome == 3>>
+			«Ну что же, — с деланным разочарованием протягивает бармен. — Похоже, вы выполнили все условия акции — приготовили и выпили по три отличных коктейля. Поздравляю!»
+			<br>
+			Ты, улыбаясь широкой нетрезвой улыбкой, киваешь в ответ. Бармен протягивает вам по картонному листу с вычеркнутыми названиями коктейлей: «А это вам на память. И вот ещё, — с этими словами он выкладывает перед вами ваш чек, так же перечёркнутый и с нарисованной рожицей в самбреро. — Как и обещано, бар берёт на себя все ваши расходы. Спасибо за визит. Ждём вас ещё!»
+			<br>
+			Какой же славный малый, думаешь ты, и уже было собираешься расцеловать бармена, но тот уже на другом конце стойки обслуживает другого клиента. Потом вы с приятелем хохоча собираете свои трофеи и шумно покидаете заведение.
+			<br><br>
+			<center>[[Виват!|GoodEnd]]</center>
+		<</if>>
 	<<else>>
 		<<display "BadEnd">>
 	<</if>>
@@ -300,8 +336,10 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	<<display "beerInit">>
 	<<display "bottleInit">>
 :: DepthCharge [nobr]
+	<<display "DepthChargeInit">>
 	<<set $counterChildren = ["bottle", "highball", "shot"]>>
 	<<set $recipeLog = []>>
+	<<set $historyArr = []>>
 	<<set $recipeInv = "<<display 'counterInv'>> <<display 'handsInv'>>">>
 	<div class="commandline"><p class="hint"><<click "Глубинная бомба">><<replace ".events">><<display "Hint">><</replace>><</click>></p><p class="drunkness"><<display "HowDrunkAreYou">></p></div>
 	<span class="decor"><<display "BarDescription">></span>
@@ -322,7 +360,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 		<<addclass ".hint" "turnoff">>
 			<<set $args[2] = "Ты, наконец, допиваешь остатки пива вперемешку с текилой — стопка легонько стукается о зубы — и, отняв стакан ото рта, шумно выдыхаешь, вытираешь выступившие слёзы и с победной улыбкой водружаешь пустой стакан на стойку.">>
 		<<replace ".outcome">>
-			<br>[[Сделано!|DepthChargeOutcome][$outcome = 1]]
+			<br>[[Сделано!|DepthChargeOutcome][$outcome++]]
 		<</replace>>
 	<<elseif $drunkness == 120>>
 		<<addclass ".decor" "turnoff">>
@@ -337,7 +375,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 			<<set $args[2] = "Ты прикладываешь стопку к губам, запрокидываешь голову и, с трудом проглотив текилу, вдруг чувствуешь, как к горлу подкатывает тошнота.">>
 		<</if>>
 		<<replace ".outcome">>
-			<br>[[...|DepthChargeOutcome][$outcome = 0]]
+			<br>[[!!!|DepthChargeOutcome][$outcome = 0]]
 		<</replace>>
 	<<else>>
 		<<if $args[1] != "Продолжать пить пиво" && $args[1] != "Начать пить пиво" && $args[2]>>
@@ -368,10 +406,21 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	<<if $outcome>>
 		«Отлично, — говорит подошедший бармен. — Я засчитываю вам „Глубинную бомбу“». С этими словами он вычёркивает второй коктейль в списке.
 		<br>
-		«Выбирайте следующий».
-		<br>
+		<<if $outcome < 3>>
+			«Выбирайте следующий».
+			<br>
+		<</if>>
 		<<set $tableDepthCharge = "''==Глубинная бомба==''">>
 		<<display "Table">>
+		<<if $outcome == 3>>
+			«Ну что же, — с деланным разочарованием протягивает бармен. — Похоже, вы выполнили все условия акции — приготовили и выпили по три отличных коктейля. Поздравляю!»
+			<br>
+			Ты, улыбаясь широкой нетрезвой улыбкой, киваешь в ответ. Бармен протягивает вам по картонному листу с вычеркнутыми названиями коктейлей: «А это вам на память. И вот ещё, — с этими словами он выкладывает перед вами ваш чек, так же перечёркнутый и с нарисованной рожицей в самбреро. — Как и обещано, бар берёт на себя все ваши расходы. Спасибо за визит. Ждём вас ещё!»
+			<br>
+			Какой же славный малый, думаешь ты, и уже было собираешься расцеловать бармена, но тот уже на другом конце стойки обслуживает другого клиента. Потом вы с приятелем хохоча собираете свои трофеи и шумно покидаете заведение.
+			<br><br>
+			<center>[[Виват!|GoodEnd]]</center>
+		<</if>>
 	<<else>>
 		<<display "BadEnd">>
 	<</if>>
@@ -403,8 +452,10 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	<<display "lefthandInit">>
 	<<display "righthandInit">>
 :: PalomaChaser [nobr]
+	<<display "PalomaChaserInit">>
 	<<set $counterChildren = ["shot", "plate", "salter", "honey", "juice", "shot2", "jigger", "spoon"]>>
 	<<set $recipeLog = []>>
+	<<set $historyArr = []>>
 	<<set $recipeInv = "<<display 'counterInv'>> <<display 'handsInv'>>">>
 	<div class="commandline"><p class="hint"><<click "Палома чейзер">><<replace ".events">><<display "Hint">><</replace>><</click>></p><p class="drunkness"><<display "HowDrunkAreYou">></p></div>
 	<span class="decor"><<display "BarDescription">></span>
@@ -415,7 +466,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	<span class="events"></span>
 	<span class="outcome"></span>
 :: PalomaChaserDaemon [nobr]
-	<<replace ".beta">><<print $shot2Ready>><</replace>>
+	<<replace ".beta">><<print $recipeLog.toString()>><</replace>>
 	<<if $recipeLog[1] == "drinkPaloma">>
 		<<addclass ".decor" "turnoff">>
 		<<addclass ".inventory" "turnoff">>
@@ -423,9 +474,9 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 		<<addclass ".focus" "turnoff">>
 		<<addclass ".actions" "hidden">>
 		<<addclass ".hint" "turnoff">>
-		<<set $args[2] = "Ты залпом запиваешь текилу прекрасно приготовленным Палома чейзером и с победной улыбкой ставишь стопку на стойку.">>
+		<<set $args[2] = "Ты залпом запиваешь текилу превосходно приготовленным Палома чейзером и с победной улыбкой ставишь стопку на стойку.">>
 		<<replace ".outcome">>
-			<br>[[Сделано!|PalomaChaserOutcome][$outcome = 1]]
+			<br>[[Сделано!|PalomaChaserOutcome][$outcome++]]
 		<</replace>>
 	<<elseif $drunkness == 120>>
 		<<addclass ".decor" "turnoff">>
@@ -436,7 +487,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 		<<addclass ".hint" "turnoff">>
 		<<set $args[2] = "Ты прикладываешь стопку к губам, запрокидываешь голову и, с трудом проглотив текилу, вдруг чувствуешь, как к горлу подкатывает тошнота.">>
 		<<replace ".outcome">>
-			<br>[[...|PalomaChaserOutcome][$outcome = 0]]
+			<br>[[!!!|PalomaChaserOutcome][$outcome = 0]]
 		<</replace>>
 	<<else>>
 		<<if $plateChildren.contains("lime") and $limeSqueezed>>
@@ -460,8 +511,12 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 		<</if>>
 		<<if $shot2contents.honey == 10 && $shot2contents.juice == 30 && $shot2contents.lime && $shot2contents.salt>>
 			<<set $shot2Ready = true>>
+			<<set $shot2Name = "стопка с Палома чейзером">>
+			<<set $shot2NameG = "стопку с Палома чейзером">>
 		<<else>>
 			<<unset $shot2Ready>>
+			<<set $shot2Name = "стопка для чейзера">>
+			<<set $shot2NameG = "стопку для чейзера">>
 		<</if>>
 		<<if $recipeLog[0] == "drinkTequila" && $shot2Ready>>
 			<<if !$counter>>
@@ -483,10 +538,21 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	<<if $outcome>>
 		«Отлично, — говорит подошедший бармен. — Я засчитываю вам „Палома чейзер“». С этими словами он вычёркивает третий коктейль в списке.
 		<br>
-		«Выбирайте следующий».
-		<br>
-		<<set $tableDepthCharge = "''==Палома чейзер==''">>
+		<<if $outcome < 3>>
+			«Выбирайте следующий».
+			<br>
+		<</if>>
+		<<set $tablePalomaChaser = "''==Палома чейзер==''">>
 		<<display "Table">>
+		<<if $outcome == 3>>
+			«Ну что же, — с деланным разочарованием протягивает бармен. — Похоже, вы выполнили все условия акции — приготовили и выпили по три отличных коктейля. Поздравляю!»
+			<br>
+			Ты, улыбаясь широкой нетрезвой улыбкой, киваешь в ответ. Бармен протягивает вам по картонному листу с вычеркнутыми названиями коктейлей: «А это вам на память. И вот ещё, — с этими словами он выкладывает перед вами ваш чек, так же перечёркнутый и с нарисованной рожицей в самбреро. — Как и обещано, бар берёт на себя все ваши расходы. Спасибо за визит. Ждём вас ещё!»
+			<br>
+			Какой же славный малый, думаешь ты, и уже было собираешься расцеловать бармена, но тот уже на другом конце стойки обслуживает другого клиента. Потом вы с приятелем хохоча собираете свои трофеи и шумно покидаете заведение.
+			<br><br>
+			<center>[[Виват!|GoodEnd]]</center>
+		<</if>>
 	<<else>>
 		<<display "BadEnd">>
 	<</if>>
@@ -890,7 +956,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	<</if>>
 	<<print ($tequilaSalted ? " На дне видны несколько медленно растворяющихся кристалликов соли." : "")>>
 :: shotInv [nobr]
-	<<if $shotChildren[0] == "tequila">>
+	<<if $shotChildren.contains("tequila")>>
 		<<object "стопка" "shot">> с <<object "текилой" "tequila">>
 	<<else>>
 		пустая пятидесятиграммовая <<object "стопка" "shot">>
@@ -1385,7 +1451,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	<<set $shot2contents.salt = false>>
 :: shot2DrinkAct [nobr]
 	<<if $recipeLog[0] == "drinkTequila" && $shot2Ready>>
-		<<set $recipeLog[1] == "drinkPaloma">>
+		<<set $recipeLog[1] = "drinkPaloma">>
 	<</if>>
 
 

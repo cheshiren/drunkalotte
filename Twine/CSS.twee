@@ -3,7 +3,7 @@
 /* APPEARANCE */
 
 @import url(http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic&subset=cyrillic,latin);
-@import url(http://fonts.googleapis.com/css?family=Kurale|Comfortaa:700&subset=cyrillic);
+@import url(http://fonts.googleapis.com/css?family=Comfortaa:700&subset=cyrillic);
 
 body {
 	/*запретить выделение текста игроком
@@ -448,7 +448,7 @@ body {
 }
 
 #ui-bar {
-	/*display: none;*/
+	display: none;
 	position: fixed;
 	z-index: 50;
 	top: 0;
