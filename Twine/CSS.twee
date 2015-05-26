@@ -786,3 +786,13 @@ button:active, #ui-body-close:active {
 	margin: 0;
 	padding: 0.3em 0.5em;
 }
+
+.drunkness110 {
+	-webkit-filter: blur(1px);
+	filter: blur(1px);
+}
+
+.drunkness120 {
+	-webkit-filter: blur(1.5px);
+	filter: blur(1.5px);
+}

@@ -52,6 +52,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 Выпей текилу и запей чейзером
 
 :: Restart [nobr]
+	<<removeclass "body" "drunkness110 drunkness120">>
 	<<display "StoryInit">>
 	<<goto "Mephisto">>
 
@@ -165,9 +166,10 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	Опьянение: <<print $drunkness>>% [<<print $AllGodsNames[$i]>>]
 
 :: BadEnd [nobr]
-	Ты вскакиваешь со стула и бросаешься в направлении туалета.
+	/%<<addclass "body" "drunkness120">>%/
+	@@.drunkness120;Ты вскакиваешь со стула и бросаешься в направлении туалета.
 	<br>
-	Через полчаса там тебя, бесчувственного, и находит твой товарищ на пару с охранником, вскрывшем дверь. Тебя приводят в относительный порядок, усаживают в такси, доставляют домой и передают в руки жены. Но ты всего этого не помнишь.
+	Через полчаса там тебя, бесчувственного, и находит твой товарищ на пару с охранником, вскрывшем дверь. Тебя приводят в относительный порядок, усаживают в такси, доставляют домой и передают в руки жены. Но ты всего этого не помнишь.@@
 	<br>
 	Утро тебя встречает ослепительным солнцем из окна, яркими вспышками головной боли и сверкающими глазами супруги.
 	<br><br>
@@ -225,6 +227,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	<<display "BasicRecipeInit">>
 	<<set $recipeLog = []>>
 	<<set $historyArr = []>>
+	<<unset $focus>>
 	<<set $recipeInv = "<<display 'counterInv'>> <<display 'handsInv'>>">>
 	<div class="commandline"><p class="hint"><<click "Текила с лаймом и солью">><<replace ".events">><<display "Hint">><</replace>><</click>></p><p class="drunkness"><<display "HowDrunkAreYou">></p></div>
 	<span class="decor"><<display "BarDescription">></span>
@@ -236,6 +239,12 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	<span class="outcome"></span>
 :: BasicRecipeDaemon [nobr]
 	<<replace ".beta">><<print $righthandSalted>><</replace>>
+	<<if $drunkness == 110>>
+		<<addclass "body" "drunkness110">>
+	<<elseif $drunkness >= 120>>
+		<<removeclass "body" "drunkness110">>
+		<<addclass "body" "drunkness120">>
+	<</if>>
 	<<if $recipeLog[0] == "lickHand" && $recipeLog[1] == "drinkTequila" && $recipeLog[2] == "eatLime">>
 		<<addclass ".decor" "turnoff">>
 		<<addclass ".inventory" "turnoff">>
@@ -243,11 +252,11 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 		<<addclass ".focus" "turnoff">>
 		<<addclass ".actions" "hidden">>
 		<<addclass ".hint" "turnoff">>
-		<<set $args[2] = "Ты прикладываешь стопку к губам, запрокидываешь голову, проглатываешь маслянистую жидкость и с победной улыбкой водружаешь пустую стопку на стойку.">>
+		<<set $args[2] = "Ты с наслаждением впиваешься в дольку лайма, жмурясь, пережёвываешь его и довольный зовёшь бармена.">>
 		<<replace ".outcome">>
 			<br>[[Сделано!|BasicRecipeOutcome][$outcome++]]
 		<</replace>>
-	<<elseif $drunkness == 120>>
+	<<elseif $drunkness >= 120>>
 		<<addclass ".decor" "turnoff">>
 		<<addclass ".inventory" "turnoff">>
 		<<addclass ".history" "turnoff">>
@@ -340,6 +349,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	<<set $counterChildren = ["bottle", "highball", "shot"]>>
 	<<set $recipeLog = []>>
 	<<set $historyArr = []>>
+	<<unset $focus>>
 	<<set $recipeInv = "<<display 'counterInv'>> <<display 'handsInv'>>">>
 	<div class="commandline"><p class="hint"><<click "Глубинная бомба">><<replace ".events">><<display "Hint">><</replace>><</click>></p><p class="drunkness"><<display "HowDrunkAreYou">></p></div>
 	<span class="decor"><<display "BarDescription">></span>
@@ -351,6 +361,12 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	<span class="outcome"></span>
 :: DepthChargeDaemon [nobr]
 	<<replace ".beta">><<print $shotChildren.toString()>><</replace>>
+	<<if $drunkness == 110>>
+		<<addclass "body" "drunkness110">>
+	<<elseif $drunkness >= 120>>
+		<<removeclass "body" "drunkness110">>
+		<<addclass "body" "drunkness120">>
+	<</if>>
 	<<if $recipeLog[0] == "done">>
 		<<addclass ".decor" "turnoff">>
 		<<addclass ".inventory" "turnoff">>
@@ -362,7 +378,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 		<<replace ".outcome">>
 			<br>[[Сделано!|DepthChargeOutcome][$outcome++]]
 		<</replace>>
-	<<elseif $drunkness == 120>>
+	<<elseif $drunkness >= 120>>
 		<<addclass ".decor" "turnoff">>
 		<<addclass ".inventory" "turnoff">>
 		<<addclass ".history" "turnoff">>
@@ -456,6 +472,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	<<set $counterChildren = ["shot", "plate", "salter", "honey", "juice", "shot2", "jigger", "spoon"]>>
 	<<set $recipeLog = []>>
 	<<set $historyArr = []>>
+	<<unset $focus>>
 	<<set $recipeInv = "<<display 'counterInv'>> <<display 'handsInv'>>">>
 	<div class="commandline"><p class="hint"><<click "Палома чейзер">><<replace ".events">><<display "Hint">><</replace>><</click>></p><p class="drunkness"><<display "HowDrunkAreYou">></p></div>
 	<span class="decor"><<display "BarDescription">></span>
@@ -467,6 +484,12 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 	<span class="outcome"></span>
 :: PalomaChaserDaemon [nobr]
 	<<replace ".beta">><<print $recipeLog.toString()>><</replace>>
+	<<if $drunkness == 110>>
+		<<addclass "body" "drunkness110">>
+	<<elseif $drunkness >= 120>>
+		<<removeclass "body" "drunkness110">>
+		<<addclass "body" "drunkness120">>
+	<</if>>
 	<<if $recipeLog[1] == "drinkPaloma">>
 		<<addclass ".decor" "turnoff">>
 		<<addclass ".inventory" "turnoff">>
@@ -478,7 +501,7 @@ http://patorjk.com/software/taag/#p=display&f=Banner
 		<<replace ".outcome">>
 			<br>[[Сделано!|PalomaChaserOutcome][$outcome++]]
 		<</replace>>
-	<<elseif $drunkness == 120>>
+	<<elseif $drunkness >= 120>>
 		<<addclass ".decor" "turnoff">>
 		<<addclass ".inventory" "turnoff">>
 		<<addclass ".history" "turnoff">>
